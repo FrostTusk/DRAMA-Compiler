@@ -38,7 +38,7 @@ public class Program {
 		this.url = url;
 	}
 	
-	private void setFunctions(List<Function> functions) {
+	private void setFunctions(List<Function> functions) throws IllegalArgumentException {
 		for (Function function: functions) {
 			if (!canHaveAsFunction(function))
 				throw new IllegalArgumentException();
@@ -47,8 +47,7 @@ public class Program {
 		
 		try {
 			getFunction("main");
-		}
-		catch (NoSuchElementException e) {
+		} catch (NoSuchElementException e) {
 			throw new IllegalArgumentException(e);
 		}
 	}
