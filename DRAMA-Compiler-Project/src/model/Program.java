@@ -19,9 +19,9 @@ public class Program {
 	/**
 	 * Create a new Program object.
 	 * 
-	 * @param functions
-	 * @param variables
-	 * @param structs
+	 * @param functions the given function
+	 * @param variables the given variables
+	 * @param structs the given structs
 	 */
 	public Program(List<Function> functions, List<Variable> variables, List<Struct> structs) {
 		setFunctions(functions);
