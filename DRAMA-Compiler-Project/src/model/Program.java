@@ -5,7 +5,7 @@ import language.*;
 
 public class Program {
 
-	public Program(List<Function> functions, List<Variable> variables, List<Struct> structs, URL url) {
+	public Program(List<Function> functions, List<Variable> variables, List<Struct> structs) {
 		setURL(url);
 		setFunctions(functions);
 	}
@@ -54,7 +54,8 @@ public class Program {
 	}
 	
 	
-	public void compile() {
+	public void compile(URL url) {
+		setURL(url);
 		getFunction("main").compile();
 	}
 
