@@ -3,6 +3,7 @@ package parser;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import language.*;
 import model.*;
@@ -162,7 +163,7 @@ public class CParser {
 	 * 			The start of where to start parsing to a function.
 	 * 			This is the character right after "def".
 	 * 			In "defX" the X represents the character of which start is 
-	 * 			the index.
+	 * 			the index. start will be used as index 0.
 	 * 
 	 * @post	Pointer points to the last char of the function definition: "}".
 	 * 			| Character.toString(programString.charAt(pointer)).equals("}")
@@ -173,8 +174,8 @@ public class CParser {
 		if (!inFunction || inStruct)
 			throw new IllegalArgumentException();
 		int end = -1;
-		String name = mineName(start);
-		mineFirstNonWhiteSpace(pointer);
+		String name = mineName(start, "{");
+		mineNonWhiteSpace(pointer);
 		List<Parameter> parameters = mineParameters(start);
 		
 		int temp = pointer;
@@ -197,7 +198,7 @@ public class CParser {
 	 * 			The start of where to start parsing to a struct.
 	 * 			This is the character right after "struct".
 	 * 			In "structX" the X represents the character of which start is 
-	 * 			the index.
+	 * 			the index. start will be used as index 0.
 	 * 
 	 * @post	Pointer points to the last char of the struct definition: "}".
 	 * 			| Character.toString(programString.charAt(pointer)).equals("}")
@@ -234,11 +235,11 @@ public class CParser {
 			throw new IllegalArgumentException();
 		switch (buffer) {
 			case "def": 
-				mineFirstNonWhiteSpace(i);
+				mineNonWhiteSpace(i);
 				functions.add(parseToFunction(pointer));
 				break;
 			case "struct": 
-				mineFirstNonWhiteSpace(i);
+				mineNonWhiteSpace(i);
 				structs.add(parseToStruct(pointer));
 				break;
 			default: 
@@ -255,7 +256,7 @@ public class CParser {
 			throw new IllegalArgumentException();
 		switch (buffer) {
 			case "while": 
-				mineFirstNonWhiteSpace(i);
+				mineNonWhiteSpace(i);
 				parseToWhileStatement(i);
 				break;
 			case "for": 
@@ -277,7 +278,7 @@ public class CParser {
 			throw new IllegalArgumentException();
 		switch (buffer) {
 			case "while": 
-				mineFirstNonWhiteSpace(i);
+				mineNonWhiteSpace(i);
 				parseToWhileStatement(i);
 				break;
 			case "for": 
@@ -304,36 +305,88 @@ public class CParser {
 	
 	
 	/**
-	 * Pointer points to the first non white space character.
-	 * @return
+	 * Mine the current programString to get the first non whitespace character 
+	 * starting from a given index.
+	 * 
+	 * @param 	start
+	 * 			The start of where to start mining for the non whitespace
+	 * 			character. start will be used as index 0.
+	 * 
+	 * @post	Pointer points to the returned character.
+	 * 			| Character.toString(programString.charAt(pointer)).equals(result)
+	 * 
+	 * @return	The first non white space character mined starting from start.
+	 * 
+	 * @throws	NoSuchElementException
+	 * 			There is no first non whitespace character.
 	 */
-	private char mineFirstNonWhiteSpace(int start) {
+	private char mineNonWhiteSpace(int start) throws NoSuchElementException {
 		for (pointer = start; pointer < programString.length(); pointer++)
 			if (!Character.isWhitespace(programString.charAt(pointer)))
 				return programString.charAt(pointer);
-		throw new IllegalArgumentException();
+		throw new NoSuchElementException();
 	}
 	
 	
 	/**
-	 * Pointer points to the last char of the name.
-	 * @return
+	 * Mine the current programString to get the first name
+	 * starting from a given index.
+	 * 
+	 * @param 	start
+	 * 			The start of where to start mining for a name.
+	 * 			start will be used as index 0.
+	 * @param	end
+	 * 			The character that will be found at the end of the name
+	 * 			represented as a string. This needs to be of length 1.
+	 * 
+	 * @post	Pointer points to end of the returned String.
+	 * 			| Character.toString(programString.charAt(pointer)).
+	 * 			| equals(result.charAt(result.length -1))
+	 * 
+	 * @return	A String representing the first name.
+	 * 
+	 * @throws	IllegalArgumentException
+	 * 			The given end string is not 1 character long.
+	 * 			| end.length() != 2
+	 * @throws	NoSuchElementException This means there
+	 * 			is no end character: end.
+	 * 			There is no first name.
+	 * @throws	NullPointerException
+	 * 			The given end string is null.
+	 * 			| end == null
 	 */
-	private String mineName(int start) {
+	private String mineName(int start, String end) 
+			throws IllegalArgumentException, NoSuchElementException, NullPointerException {
+		if (end.length() != 1)
+			throw new IllegalArgumentException();
 		String buffer = "";
 		for (pointer = start; pointer < programString.length(); pointer++) {
 			char ch = programString.charAt(pointer);
-			if (Character.toString(ch).equals("{"))
+			if (Character.toString(ch).equals(end))
 				return buffer;
 			buffer += ch;
 		}
-		throw new IllegalArgumentException();
+		throw new NoSuchElementException();
 	}
 	
 	
 	/**
-	 * Pointer points to the last char of the parameters ")".
-	 * @return
+	 * Mine the current programString to get the first parameters
+	 * starting from a given index.
+	 * 
+	 * @param 	start
+	 * 			The start of where to start mining for parameters.
+	 * 			The character at this position should be "("
+	 * 			start will be used as index 0.
+	 * 
+	 * @post	Pointer points to end of the parameters: ")".
+	 * 			| Character.toString(programString.charAt(pointer)).equals(")")
+	 * 
+	 * @return	A List of Parameters representing the parameters.
+	 * 
+	 * @throws	NoSuchElementException
+	 * 			There are no valid parameters. This means there
+	 * 			is no end character: ")".
 	 */
 	private List<Parameter> mineParameters(int start) {
 		return null;
