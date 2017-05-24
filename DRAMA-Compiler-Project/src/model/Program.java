@@ -1,12 +1,29 @@
 package model;
 
-import java.util.*;
-import language.*;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
+import language.Function;
+import language.Struct;
+import language.Variable;
+
+/**
+ * A class that represent a DRAMA program.
+ * 
+ * @author Mathijs Hubrechtsen
+ *
+ */
 public class Program {
 
+	/**
+	 * Create a new Program object.
+	 * 
+	 * @param functions
+	 * @param variables
+	 * @param structs
+	 */
 	public Program(List<Function> functions, List<Variable> variables, List<Struct> structs) {
-		setURL(url);
 		setFunctions(functions);
 	}
 	
@@ -51,6 +68,7 @@ public class Program {
 			throw new IllegalArgumentException(e);
 		}
 	}
+	
 	
 	
 	public void compile(URL url) {

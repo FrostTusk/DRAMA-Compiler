@@ -1,8 +1,13 @@
 package src;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
-import exceptions.*;
+
+import exceptions.ErrorHandler;
+import exceptions.ErrorType;
+import model.Program;
 import model.URL;
 import parser.CParser;
 
@@ -63,14 +68,19 @@ public class Main {
 		}
 		
 		scanner.close();
+		Program program;
 		try {
-			parser.parse(input).compile(output);
+			program = parser.parse(input);
+			try {
+				program.compile(output);
+			} catch(RuntimeException e){
+				System.out.println("Not Implemented.");
+			}
 		} catch (IOException e) {
 			errorHandler.handleIOError(ErrorType.UNKOWNIO);
-		} catch (NullPointerException e) {
+		} catch (RuntimeException e) {
 			System.out.println("Not Implemented.");
-		}
-		
+		}		
 	}
 	
 }

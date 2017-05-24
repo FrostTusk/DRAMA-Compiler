@@ -1,13 +1,30 @@
 package parser;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import language.*;
-import model.*;
+import language.Function;
+import language.Parameter;
+import language.Struct;
+import language.Variable;
+import language.statements.SequenceStatement;
+import language.statements.Statement;
+import model.Program;
+import model.URL;
 
+/**
+ * Class representing a Parser object that parses a C file to
+ * a internal representation of a DRAMA program as seen in the SOCS course
+ * at KULeuven. The C file needs to use the same C syntax as described in
+ * that course.
+ * 
+ * @author Mathijs Hubrechtsen
+ *
+ */
 public class CParser {	
 	
 	public CParser() {
@@ -72,7 +89,7 @@ public class CParser {
 	
 	/**
 	 * Parse the file located at the given URL to a DRAMA Program.
-	 * The file needs to used the C syntax as seen in the SOCS class
+	 * The file needs to used the C syntax as seen in the SOCS course
 	 * at KULeuven.
 	 * 
 	 * @param 	url
@@ -83,13 +100,14 @@ public class CParser {
 	 * @throws 	IOException
 	 */
 	public Program parse(URL url) throws IOException {
+		reset();
 		return parseToProgram(parseToString(url));
 	}
 	
 	
 	/**
 	 * Parse the file located at the given URL to a DRAMA Program.
-	 * The file needs to used the C syntax as seen in the SOCS class
+	 * The file needs to used the C syntax as seen in the SOCS course
 	 * at KULeuven.
 	 * 
 	 * @param 	url
@@ -107,7 +125,7 @@ public class CParser {
 		    String line = br.readLine();
 		    while (line != null) {
 		        sb.append(line);
-		        sb.append(System.lineSeparator());
+//		        sb.append(System.lineSeparator());
 		        line = br.readLine();
 		    }
 		    return sb.toString();
@@ -119,7 +137,7 @@ public class CParser {
 	
 	/**
 	 * Parse a given string to a DRAMA Program.
-	 * The file needs to used the C syntax as seen in the SOCS class
+	 * The file needs to used the C syntax as seen in the SOCS course
 	 * at KULeuven.
 	 * 
 	 * @param 	url
@@ -133,12 +151,20 @@ public class CParser {
 		reset();
 		this.programString = programString;
 		String buffer = "";
-		for (int i = 0; i < programString.length(); i++) {
-			pointer = i;
-			char ch = programString.charAt(i);
-			if (Character.isWhitespace(ch))
-				continue;
-			buffer = handleBufferInGlobal(buffer + ch, i);
+		try {
+			for (int i = 0; i < programString.length(); i++) {
+				pointer = i;
+				char ch = programString.charAt(i);
+				if ( (Character.isWhitespace(ch)) && (buffer.equals("")) )
+					continue;
+				buffer = handleBufferInGlobal(buffer + ch, i);
+				
+			}
+		} catch (IllegalArgumentException e) {
+			
+		} catch (IllegalStateException e) {
+			
+		} catch (NoSuchElementException e) {
 			
 		}
 		return new Program(functions, variables, structs);
@@ -152,6 +178,12 @@ public class CParser {
 			 * |--------------------|
 			 */
 	
+	
+	
+	/**
+	 * Variable holding the current found statements.
+	 */
+	private List<Statement> statements;
 	
 	
 	/**
@@ -169,21 +201,27 @@ public class CParser {
 	 * 			| Character.toString(programString.charAt(pointer)).equals("}")
 	 * 
 	 * @return	A parsed function definition. 
+	 * 
+	 * @throws	IllegalStateException
+	 * 			The Parser is in the wrong state to call this method.
+	 * 			| (!inFunction) || inStruct
+	 * @throws	NoSuchElementException
+	 * 			There is no function to be parsed in the current programString.
 	 */
-	private Function parseToFunction(int start) {
+	private Function parseToFunction(int start) throws IllegalStateException, NoSuchElementException {
 		if (!inFunction || inStruct)
-			throw new IllegalArgumentException();
-		int end = -1;
+			throw new IllegalStateException();
+
 		String name = mineName(start, "{");
 		mineNonWhiteSpace(pointer);
 		List<Parameter> parameters = mineParameters(start);
 		
-		int temp = pointer;
+		int temp = pointer, end = -1;
 		for (pointer += 1; pointer < programString.length(); pointer++)
 			if (Character.toString(programString.charAt(pointer)).equals("}"))
 				end = pointer;
 		if (end == -1)
-			throw new IllegalArgumentException();
+			throw new NoSuchElementException();
 		
 		return new Function(name, parameters, parseToStatement(temp, end));
 	}
@@ -206,14 +244,49 @@ public class CParser {
 	 * @return	A parsed struct definition. 
 	 */
 	private Struct parseToStruct(int start) {
-		handleBufferInStruct("", 0);
 		return null;
 	}
 	
 	
-	private Statement parseToStatement(int start, int end) {
-		handleBufferInFunction("", 0);
-		return null;
+	/**
+	 * Parse the current programString starting from a given index to another index
+	 * to a statement.
+	 * 
+	 * @param 	start
+	 * 			The start of where to start parsing to a statement.
+	 * 			start will be used as index 0.
+	 * @param	end 
+	 * 			The end of where to parse to.
+	 *
+	 * @post	Pointer points to the last char of the statement: end.
+	 * 			| pointer == end
+	 * 
+	 * @return	A parsed statement.
+	 * 
+	 * @throws 	IllegalStateException
+	 * @throws	NoSuchElementException
+	 */
+	private Statement parseToStatement(int start, int end) throws IllegalStateException, NoSuchElementException {
+		statements = new ArrayList<Statement>();
+		int count = 0;
+		for (int i = start; i < end; i++) {
+			char ch = programString.charAt(pointer);
+			if (Character.toString(ch).equals(";"))
+				count += 1;
+		}
+		if (count == 0)
+			throw new NoSuchElementException();
+		
+		
+		String buffer = "";
+		for (pointer = start; pointer < end; pointer++) {
+			char ch = programString.charAt(pointer);
+			if ( (Character.isWhitespace(ch)) && (buffer.equals("")) )
+				continue;
+			buffer = handleBufferInLocal(buffer + ch, pointer);
+		}
+		
+		return new SequenceStatement(statements);
 	}
 	
 	private Statement parseToWhileStatement(int start) {
@@ -230,9 +303,9 @@ public class CParser {
 	
 	
 	
-	private String handleBufferInGlobal(String buffer, int i) {
+	private String handleBufferInGlobal(String buffer, int i) throws IllegalStateException, NoSuchElementException {
 		if (inFunction || inStruct)
-			throw new IllegalArgumentException();
+			throw new IllegalStateException();
 		switch (buffer) {
 			case "def": 
 				mineNonWhiteSpace(i);
@@ -251,31 +324,9 @@ public class CParser {
 	}
 	
 
-	private String handleBufferInFunction(String buffer, int i) {
-		if (inFunction || inStruct)
-			throw new IllegalArgumentException();
-		switch (buffer) {
-			case "while": 
-				mineNonWhiteSpace(i);
-				parseToWhileStatement(i);
-				break;
-			case "for": 
-				break;
-			case "if": 
-				break;
-			case "print":
-				break;
-			default: 
-				return buffer;
-		}
-		pointer += 1;
-		return "";
-	}
-	
-	
-	private String handleBufferInStruct(String buffer, int i) {
-		if (inFunction || inStruct)
-			throw new IllegalArgumentException();
+	private String handleBufferInLocal(String buffer, int i) throws IllegalStateException, NoSuchElementException {
+		if (!inFunction && !inStruct)
+			throw new IllegalStateException();
 		switch (buffer) {
 			case "while": 
 				mineNonWhiteSpace(i);

@@ -1,4 +1,4 @@
-package language;
+package language.statements;
 
 public interface Statement {
 	

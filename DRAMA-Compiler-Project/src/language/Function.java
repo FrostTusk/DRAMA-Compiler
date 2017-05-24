@@ -2,6 +2,7 @@ package language;
 
 import java.util.List;
 
+import language.statements.Statement;
 import model.Label;
 import model.Program;
 
