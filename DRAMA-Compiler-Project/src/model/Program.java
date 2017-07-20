@@ -89,7 +89,7 @@ public class Program {
 	private String outputTracker;
 	
 	public void addOutput(String result) {
-		outputTracker += result + "\n";
+		outputTracker += result + "\n ";
 	}
 	
 	public void writeOutput() throws FileNotFoundException {

@@ -2,8 +2,12 @@ package language;
 
 public class Compound {
 	
-	public void compile() {
-		
+	public int getAmount() {
+		return -1;
+	}
+	
+	public String compile() {
+		return "";
 	}
 
 }
