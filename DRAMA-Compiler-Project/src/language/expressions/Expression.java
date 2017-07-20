@@ -1,6 +1,6 @@
 package language.expressions;
 
-import model.DataType;
+import language.DataType;
 
 public interface Expression {
 
