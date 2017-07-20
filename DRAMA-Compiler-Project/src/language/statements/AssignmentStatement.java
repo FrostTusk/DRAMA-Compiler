@@ -12,19 +12,19 @@ public class AssignmentStatement implements Statement {
 	}
 	
 	
-	private final VariableExpression variable;
 	private final Expression expression;
+	private final VariableExpression variable;
 	
-	
-	public VariableExpression getVariable() {
-		return variable;
-	}
 	
 	public Expression getExpression() {
 		return expression;
 	}
 	
-	
+	public VariableExpression getVariable() {
+		return variable;
+	}
+
+
 	
 	private Function function;
 	
@@ -39,13 +39,12 @@ public class AssignmentStatement implements Statement {
 	public void setFunction(Function function) {
 		this.function = function;
 	}
+	
 
 
 	/**
-	 * 
-	 * @param expression
-	 * @return
 	 * @throws IllegalArgumentException
+	 * 		   The data-type of the variable and the expression or incompatible.
 	 * 		   variable.getDataType() != expression.getDataType()
 	 */
 	@Override

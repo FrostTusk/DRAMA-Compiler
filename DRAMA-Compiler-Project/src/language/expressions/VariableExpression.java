@@ -1,6 +1,6 @@
 package language.expressions;
 
-import other.DataType;
+import model.DataType;
 
 public class VariableExpression implements Expression {
 	

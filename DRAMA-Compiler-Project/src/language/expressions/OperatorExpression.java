@@ -1,5 +1,5 @@
 package language.expressions;
 
-public class CompoundExpression {
+public class OperatorExpression {
 
 }

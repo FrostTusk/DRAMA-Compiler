@@ -4,7 +4,7 @@ import java.util.List;
 
 import language.expressions.ParameterExpression;
 import language.statements.Statement;
-import model.Label;
+import model.LabelType;
 import model.Program;
 
 public class Function {
@@ -29,14 +29,14 @@ public class Function {
 	
 	
 	private Program program;
-	private Label label;
+	private String label;
 	
 	
 	public Program getProgram() {
 		return this.program;
 	}
 	
-	public Label getLabel() {
+	public String getLabel() {
 		return this.label;
 	}
 	
@@ -45,18 +45,20 @@ public class Function {
 		this.program = program;
 	}
 	
-	public void setLabel(Label label) {
+	public void setLabel(String label) {
 		this.label = label;
 	}
 	
 	
-	
-	public Label requestLabel() {
+	/**
+	 * Returns an unused label of the given labeltype
+	 * @return
+	 */
+	public String requestLabel(LabelType type) {
 		return null;
 	}
 	
 	public void compile() {
-		setLabel(requestLabel());
 	}
 	
 }
