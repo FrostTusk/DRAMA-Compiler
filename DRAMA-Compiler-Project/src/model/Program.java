@@ -1,5 +1,9 @@
 package model;
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -70,10 +74,23 @@ public class Program {
 	}
 	
 	
-	
-	public void compile(URL url) {
+	public void compile(URL url) throws FileNotFoundException {
+		outputTracker = "";
 		setURL(url);
 		getFunction("main").compile();
+		writeOutput();
 	}
 
+	
+	private String outputTracker;
+	
+	public void addOutput(String result) {
+		outputTracker += result + "\n";
+	}
+	
+	public void writeOutput() throws FileNotFoundException {
+		System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(url.getTarget())), true));
+		System.out.println(outputTracker);
+	}
+	
 }
