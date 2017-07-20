@@ -1,5 +1,9 @@
 package model;
 
 public enum LabelType {
-	IF, ELSE, WHILE
+	IF, 
+	ELSE, 
+	WHILE, 
+	FOR,
+	
 }

@@ -15,6 +15,7 @@ public class WhileStatement implements Statement {
 	
 	
 	private final Compound condition;
+	private List<String> labels;
 	private final SequenceStatement body;
 	
 	
@@ -22,38 +23,35 @@ public class WhileStatement implements Statement {
 		return condition;
 	}
 	
-	public SequenceStatement getBody() {
-		return body;
-	}
-	
-	
-	
-	private Function function;
-	
-	@Override
-	public Function getFunction() {
-		return function;
-	}
-
-	@Override
-	public void setFunction(Function function) {
-		this.function = function;
-	}
-
-	
-	
-	private List<String> labels;
-	
-	
 	public List<String> getLabels() {
 		return this.labels;
+	}
+
+	public SequenceStatement getBody() {
+		return body;
 	}
 	
 	
 	public void setLabels(List<String> labels) {
 		this.labels = labels;
 	}
+
+
 	
+	private Function function;
+	
+	
+	@Override
+	public Function getFunction() {
+		return function;
+	}
+
+	
+	@Override
+	public void setFunction(Function function) {
+		this.function = function;
+	}
+
 	
 	
 	@Override
