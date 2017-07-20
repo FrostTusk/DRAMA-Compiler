@@ -1,20 +1,28 @@
 package language.statements;
 
-import language.Expression;
 import language.Function;
-import language.Variable;
-import model.Program;
+import language.expressions.Expression;
+import language.expressions.VariableExpression;
 
 public class AssignmentStatement implements Statement {
 
-	public AssignmentStatement(Variable variable, Expression expression) {
+	public AssignmentStatement(VariableExpression variable, Expression expression) {
 		this.variable = variable;
 		this.expression = expression;
 	}
 	
 	
-	private Variable variable;
-	private Expression expression;
+	private final VariableExpression variable;
+	private final Expression expression;
+	
+	
+	public VariableExpression getVariable() {
+		return variable;
+	}
+	
+	public Expression getExpression() {
+		return expression;
+	}
 	
 	
 	
@@ -26,11 +34,6 @@ public class AssignmentStatement implements Statement {
 		return function;
 	}
 
-	@Override
-	public Program getProgram() {
-		return getFunction().getProgram();
-	}
-
 
 	@Override
 	public void setFunction(Function function) {
@@ -38,10 +41,16 @@ public class AssignmentStatement implements Statement {
 	}
 
 
+	/**
+	 * 
+	 * @param expression
+	 * @return
+	 * @throws IllegalArgumentException
+	 * 		   variable.getDataType() != expression.getDataType()
+	 */
 	@Override
-	public void compile() {
-		
-		
+	public void compile() throws IllegalArgumentException {
+		getFunction().getProgram().addOutput(variable.store(getExpression()));	
 	}
 
 }

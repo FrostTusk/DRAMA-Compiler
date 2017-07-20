@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import language.Function;
-import language.Parameter;
 import language.Struct;
-import language.Variable;
+import language.expressions.ParameterExpression;
+import language.expressions.VariableExpression;
 import language.statements.SequenceStatement;
 import language.statements.Statement;
 import model.Program;
@@ -61,7 +61,7 @@ public class CParser {
 	/**
 	 * List holding all the current variable definitions.
 	 */
-	private List<Variable> variables;
+	private List<VariableExpression> variables;
 	
 	
 	/**
@@ -74,7 +74,7 @@ public class CParser {
 		inStruct = false;
 		structs = new ArrayList<Struct>();
 		functions = new ArrayList<Function>();
-		variables = new ArrayList<Variable>();
+		variables = new ArrayList<VariableExpression>();
 	}
 	
 	
@@ -214,7 +214,7 @@ public class CParser {
 
 		String name = mineName(start, "{");
 		mineNonWhiteSpace(pointer);
-		List<Parameter> parameters = mineParameters(start);
+		List<ParameterExpression> parameters = mineParameters(start);
 		
 		int temp = pointer, end = -1;
 		for (pointer += 1; pointer < programString.length(); pointer++)
@@ -439,7 +439,7 @@ public class CParser {
 	 * 			There are no valid parameters. This means there
 	 * 			is no end character: ")".
 	 */
-	private List<Parameter> mineParameters(int start) {
+	private List<ParameterExpression> mineParameters(int start) {
 		return null;
 	}
 	

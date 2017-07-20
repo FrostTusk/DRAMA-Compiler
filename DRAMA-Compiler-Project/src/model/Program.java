@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 
 import language.Function;
 import language.Struct;
-import language.Variable;
+import language.expressions.VariableExpression;
 
 /**
  * A class that represent a DRAMA program.
@@ -27,7 +27,7 @@ public class Program {
 	 * @param variables the given variables
 	 * @param structs the given structs
 	 */
-	public Program(List<Function> functions, List<Variable> variables, List<Struct> structs) {
+	public Program(List<Function> functions, List<VariableExpression> variables, List<Struct> structs) {
 		setFunctions(functions);
 	}
 	
@@ -77,7 +77,11 @@ public class Program {
 	public void compile(URL url) throws FileNotFoundException {
 		outputTracker = "";
 		setURL(url);
-		getFunction("main").compile();
+		try {
+			getFunction("main").compile();
+		} catch (IllegalArgumentException e) {
+			
+		}
 		writeOutput();
 	}
 

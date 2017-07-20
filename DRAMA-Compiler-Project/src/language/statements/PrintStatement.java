@@ -1,8 +1,7 @@
 package language.statements;
 
-import language.Expression;
 import language.Function;
-import model.Program;
+import language.expressions.Expression;
 
 public class PrintStatement implements Statement {
 
@@ -23,11 +22,6 @@ public class PrintStatement implements Statement {
 		return function;
 	}
 
-	@Override
-	public Program getProgram() {
-		return getFunction().getProgram();
-	}
-
 	
 	@Override
 	public void setFunction(Function function) {
@@ -38,7 +32,7 @@ public class PrintStatement implements Statement {
 	
 	@Override
 	public void compile() {
-		getProgram().addOutput("DRU " + expression.evaluate());
+		getFunction().getProgram().addOutput("DRU " + expression.evaluate());
 	}
 
 }

@@ -2,13 +2,14 @@ package language;
 
 import java.util.List;
 
+import language.expressions.ParameterExpression;
 import language.statements.Statement;
 import model.Label;
 import model.Program;
 
 public class Function {
 	
-	public Function(String name, List<Parameter> parameters, Statement statement) {
+	public Function(String name, List<ParameterExpression> parameters, Statement statement) {
 		setName(name);
 	}
 	
