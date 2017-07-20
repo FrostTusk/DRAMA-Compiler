@@ -2,20 +2,23 @@ package language.statements;
 
 import language.Expression;
 import language.Function;
+import language.Variable;
 import model.Program;
 
-public class PrintStatement implements Statement {
+public class AssignmentStatement implements Statement {
 
-	public PrintStatement(Expression expression) {
+	public AssignmentStatement(Variable variable, Expression expression) {
+		this.variable = variable;
 		this.expression = expression;
 	}
 	
 	
+	private Variable variable;
 	private Expression expression;
 	
 	
 	
-	private Function function; 
+	private Function function;
 	
 	
 	@Override
@@ -28,17 +31,17 @@ public class PrintStatement implements Statement {
 		return getFunction().getProgram();
 	}
 
-	
+
 	@Override
 	public void setFunction(Function function) {
-		this.function = function;		
+		this.function = function;
 	}
 
-	
-	
+
 	@Override
 	public void compile() {
-		getProgram().addOutput("DRU " + expression.evaluate());
+		
+		
 	}
 
 }

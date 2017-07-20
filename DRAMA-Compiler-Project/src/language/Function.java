@@ -26,6 +26,7 @@ public class Function {
 	}
 	
 	
+	
 	private Program program;
 	private Label label;
 	
@@ -46,6 +47,7 @@ public class Function {
 	public void setLabel(Label label) {
 		this.label = label;
 	}
+	
 	
 	
 	public Label requestLabel() {

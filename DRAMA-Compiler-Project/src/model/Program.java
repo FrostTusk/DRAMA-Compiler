@@ -63,9 +63,9 @@ public class Program {
 		for (Function function: functions) {
 			if (!canHaveAsFunction(function))
 				throw new IllegalArgumentException();
-			this.functionsMap.put(function.getName(), function);
+			functionsMap.put(function.getName(), function);
+			
 		}
-		
 		try {
 			getFunction("main");
 		} catch (NoSuchElementException e) {

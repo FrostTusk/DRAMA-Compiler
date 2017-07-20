@@ -1,10 +1,13 @@
 package language.statements;
 
+import language.Function;
 import model.Program;
 
 public interface Statement {
 	
-	public Program getOwner();
-	public void setOwner(Program owner);
+	public Function getFunction();
+	public Program getProgram();
+	public void setFunction(Function function);
 	public void compile();
+	
 }
