@@ -223,7 +223,7 @@ public class CParser {
 		if (end == -1)
 			throw new NoSuchElementException();
 		
-		return new Function(name, parameters, parseToStatement(temp, end));
+		return new Function(parseToStatement(temp, end), name, parameters);
 	}
 	
 	

@@ -5,6 +5,8 @@ import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -35,7 +37,9 @@ public class Program {
 	 * 			the given structs
 	 */
 	public Program(List<Function> functions, List<Struct> structs, List<VariableExpression> variables) {
-
+		this.functionsMap = new HashMap<String, Function>();
+		this.structs = new ArrayList<Struct>();
+		this.globalVars = new ArrayList<VariableExpression>();
 		setFunctions(functions);
 		setStructs(structs);
 		setGlobalVars(variables);
@@ -156,6 +160,7 @@ public class Program {
 		outputTracker += result + "\n ";
 	}
 
+	
 	/**
 	 * Writes the internal output tracker to the current file.
 	 * @throws 	FileNotFoundException
@@ -170,6 +175,7 @@ public class Program {
 	}
 
 	
+	
 	/**
 	 * Compiles this Program Object to a DRAMA program in the file found at the given URL.
 	 * @param 	url
@@ -180,6 +186,7 @@ public class Program {
 	public void compile(URL url) throws FileNotFoundException {
 		outputTracker = "";
 		setURL(url);
+		labelsMap = new HashMap<String, Integer>();
 		try {
 			getFunction("main").compile();
 		} catch (IllegalArgumentException e) {
@@ -193,5 +200,16 @@ public class Program {
 		addOutput("EINDPR");
 		writeOutput();
 	}
+	
+	
+	private Map<String, Integer> labelsMap;
+	
+	public String getLabel(Function requester, LabelType type) {
+		int count = labelsMap.get(requester.getName() + type.name());
+		String result = requester.getName() + type + Integer.toString(count);
+		labelsMap.put(requester.getName() + type, count + 1);
+		return result;
+	}
+	
 	
 }

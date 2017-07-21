@@ -2,6 +2,7 @@ package language.statements;
 
 import java.util.List;
 
+import helper.Helper;
 import language.Function;
 import model.LabelType;
 
@@ -69,26 +70,23 @@ public class ForStatement implements Statement {
 	public void compile() { // TODO Reread HEAP!
 		String label1 = getFunction().requestLabel(LabelType.FOR);
 		String label2 = getFunction().requestLabel(LabelType.FOR);
-		write("BIG " + Integer.toString(start) + ", " + "HEAP"); // TODO Reread HEAP
-		write("BST R0");
-		write("HIA R0, HEAP");
-		write("OPT.w R0, 1");
-		write("BIG R0, HEAP");
-		write("HST R0");
-		write(label1 + ": MNTS");
-		write("VGL R7"); // TODO Reread HEAP
-		write("VSP GRG, " + label2);
+		Helper helper = new Helper();
+		helper.setStatement(this);
+		helper.addOutput("BIG " + Integer.toString(start) + ", " + "HEAP"); // TODO Reread HEAP
+		helper.addOutput("BST R0");
+		helper.addOutput("HIA R0, HEAP");
+		helper.addOutput("OPT.w R0, 1");
+		helper.addOutput("BIG R0, HEAP");
+		helper.addOutput("HST R0");
+		helper.addOutput(label1 + ": NWL");
+		helper.addOutput("VGL R7"); // TODO Reread HEAP
+		helper.addOutput("VSP GRG, " + label2);
 		getBody().compile();
-		write("HIA R7");
-		write("OPT");
-		write("BIG R7");
+		helper.addOutput("HIA R7");
+		helper.addOutput("OPT");
+		helper.addOutput("BIG R7");
 		getFunction().getProgram().addOutput("SPR " + label1);
-		write(label2 + ": MNTS");
-	}
-	
-	
-	public void write(String command) {
-		getFunction().getProgram().addOutput(command);
+		helper.addOutput(label2 + ": NWL");
 	}
 	
 }

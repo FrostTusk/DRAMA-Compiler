@@ -60,7 +60,7 @@ public class WhileStatement implements Statement {
 		getFunction().getProgram().addOutput(getCondition().compile());
 		getBody().compile();
 		getFunction().getProgram().addOutput("SPR " + label);
-		getFunction().getProgram().addOutput(getLabels().get(getLabels().size() - 1) + ": MNTS"); // TODO Is this empty command?
+		getFunction().getProgram().addOutput(getLabels().get(getLabels().size() - 1) + ": NWL"); // TODO Is this empty command?
 	}
 	
 }
