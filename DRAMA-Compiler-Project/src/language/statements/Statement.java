@@ -3,6 +3,10 @@ package language.statements;
 import be.kuleuven.cs.som.annotate.Basic;
 import language.Function;
 
+/**
+ * An interface representing a Compilable DRAMA Statement.
+ * @author Mathijs Hubrechtsen
+ */
 public interface Statement {
 	
 	/**
@@ -17,7 +21,7 @@ public interface Statement {
 	 */
 	public void setFunction(Function function);
 	/**
-	 * 
+	 * Compiles this statement to it's corresponding DRAMA code.
 	 * @throws IllegalArgumentException
 	 * @throws NullPointerException
 	 */

@@ -3,7 +3,7 @@ package language.expressions;
 import language.DataType;
 import model.Toolbox;
 
-public class VariableExpression implements Expression, Storeable {
+public class VariableExpression implements Storeable {
 	
 	public VariableExpression(boolean register, DataType dataType, String name) {
 		this.register = register;

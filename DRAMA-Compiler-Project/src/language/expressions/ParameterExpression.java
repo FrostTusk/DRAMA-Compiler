@@ -2,7 +2,7 @@ package language.expressions;
 
 import language.DataType;
 
-public class ParameterExpression implements Expression, Storeable {
+public class ParameterExpression implements Storeable {
 	
 	public ParameterExpression(boolean register, DataType type, String name) {
 		this.register = register;

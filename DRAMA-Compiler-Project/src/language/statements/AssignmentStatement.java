@@ -1,41 +1,68 @@
 package language.statements;
 
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
 import language.expressions.Expression;
 import language.expressions.Storeable;
 
+/**
+ * A Class that represents a DRAMA Assignment Statement.
+ * @author Mathijs Hubrechtsen
+ */
 public class AssignmentStatement implements Statement {
 
-	public AssignmentStatement(Storeable variable, Expression expression) {
-		this.variable = variable;
+	/**
+	 * Create a new AssignmentStatement object with a given storeable and expression.
+	 * @param	storeable
+	 * 			The storeable to which the expression is assigned.
+	 * @param 	expression
+	 * 			The expression that will be assigned to the given Storeable.
+	 * @see	implementation
+	 */
+	public AssignmentStatement(Storeable storeable, Expression expression) {
+		this.storeable = storeable;
 		this.expression = expression;
 	}
 	
 	
+	/**
+	 * 
+	 */
 	private final Expression expression;
-	private final Storeable variable;
+	private final Storeable storeable;
 	
 	
+	/**
+	 * Get the expression of this AssignmentStatement.
+	 */
+	@Basic
 	public Expression getExpression() {
 		return expression;
 	}
 	
-	public Storeable getVariable() {
-		return variable;
+	/**
+	 * Get the Storeable of this AssignmentStatement.
+	 */
+	@Basic
+	public Storeable getStoreable() {
+		return storeable;
 	}
 
 
-	
+	/**
+	 * Variable registering to which Function this Statement belongs.
+	 */
 	private Function function;
 	
 	
-	@Override
+	@Basic @Override @Raw
 	public Function getFunction() {
 		return function;
 	}
 
 
-	@Override
+	@Override @Raw
 	public void setFunction(Function function) {
 		this.function = function;
 	}
@@ -43,13 +70,18 @@ public class AssignmentStatement implements Statement {
 
 
 	/**
-	 * @throws IllegalArgumentException
-	 * 		   The data-type of the variable and the expression or incompatible.
-	 * 		   variable.getDataType() != expression.getDataType()
+	 * @throws	IllegalArgumentException
+	 * 		   	The Data Type of the storeable and the expression or incompatible.
+	 * 		  	| storeable.getDataType() != expression.getDataType()
+	 * @throws	NullPointerException
+	 * 			The Statement of this Toolbox, or the Function of the Statement, or 
+	 * 			the Program of the Function was null.
+	 * 			| (getStatement() == null) || (getStatement().getFunction() == null) ||
+	 * 			| (getStatement().getFunction().getProgram() == null)
 	 */
-	@Override
-	public void compile() throws IllegalArgumentException {
-		getFunction().getProgram().addOutput(variable.store(getExpression()));	
+	@Override @Raw
+	public void compile() throws IllegalArgumentException, NullPointerException {
+		getFunction().getProgram().addOutput(storeable.store(getExpression()));	
 	}
 
 }

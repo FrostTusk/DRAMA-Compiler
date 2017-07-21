@@ -71,11 +71,11 @@ public class IfStatement implements Statement {
 		if (getElsePart() != null) {
 			String label = getFunction().requestLabel(LabelType.ELSE);
 			getFunction().getProgram().addOutput("SPR " + label);	
-			getFunction().getProgram().addOutput(getLabels().get(getLabels().size() - 1) + ": MNTS"); // TODO Is this empty command?
+			getFunction().getProgram().addOutput(getLabels().get(getLabels().size() - 1) + ": NWL");
 			getElsePart().compile();
-			getFunction().getProgram().addOutput(label + ": MNTS");
+			getFunction().getProgram().addOutput(label + ": NWL");
 		} else
-			getFunction().getProgram().addOutput(getLabels().get(getLabels().size() - 1) + ": MNTS"); // TODO Is this empty command?
+			getFunction().getProgram().addOutput(getLabels().get(getLabels().size() - 1) + ": NWL");
 	}
 
 }

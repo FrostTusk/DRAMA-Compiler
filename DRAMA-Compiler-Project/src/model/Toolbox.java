@@ -85,6 +85,8 @@ public class Toolbox {
 		switch(type) {
 			case INT:
 				return ".w";
+			case POINTER:
+				return ".i";
 			default:
 				return "";
 		}

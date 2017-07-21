@@ -1,6 +1,6 @@
 package language.expressions;
 
-public interface Storeable {
+public interface Storeable extends Expression {
 	
 	public String getLocation();
 	public void setLocation(String location);

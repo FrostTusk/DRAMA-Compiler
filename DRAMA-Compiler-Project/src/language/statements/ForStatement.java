@@ -3,12 +3,14 @@ package language.statements;
 import java.util.List;
 
 import language.Function;
+import language.expressions.Storeable;
 import model.Toolbox;
 import model.LabelType;
 
 public class ForStatement implements Statement {
 
-	public ForStatement(int start, int end, int step, SequenceStatement body) {
+	public ForStatement(Storeable storeable, int start, int end, int step, SequenceStatement body) {
+		this.storeable = storeable;
 		this.body = body;
 		this.start = start;
 		this.end = end;
@@ -16,13 +18,18 @@ public class ForStatement implements Statement {
 	}
 	
 	
+	private final Storeable storeable;
 	private final int start;
 	private final int end;
 	private final int step;	
 	private List<String> labels;
 	private final SequenceStatement body;
 
-
+	
+	public Storeable getStoreable() {
+		return storeable;
+	}
+	
 	public int getStart() {
 		return start;
 	}
@@ -72,6 +79,7 @@ public class ForStatement implements Statement {
 		String label2 = getFunction().requestLabel(LabelType.FOR);
 		Toolbox helper = new Toolbox();
 		helper.setStatement(this);
+		helper.addOutput("HIA R0, " + storeable.evaluate());
 		helper.addOutput("BIG " + Integer.toString(start) + ", " + "HEAP"); // TODO Reread HEAP
 		helper.addOutput("BST R0");
 		helper.addOutput("HIA R0, HEAP");
