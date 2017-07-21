@@ -4,6 +4,11 @@ import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 import language.DataType;
 import language.statements.Statement;
+import language.expressions.Interpretation;
+
+import static language.expressions.Interpretation.i;
+import static language.expressions.Interpretation.none;
+import static language.expressions.Interpretation.w;
 
 /**
  * A Toolbox Class containing various methods to simplify the code. 
@@ -81,14 +86,14 @@ public class Toolbox {
 	 * @return	Returns the interpretation of the given Data Type.
 	 */
 	@Raw
-	public String getInterpretation(DataType type) {
+	public Interpretation getInterpretation(DataType type) {
 		switch(type) {
 			case INT:
-				return ".w";
+				return w;
 			case POINTER:
-				return ".i";
+				return i;
 			default:
-				return "";
+				return none;
 		}
 	}
 	

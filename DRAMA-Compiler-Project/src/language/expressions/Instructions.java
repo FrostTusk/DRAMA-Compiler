@@ -3,7 +3,7 @@ package language.expressions;
 
 public enum Instructions {
 
-    HIA, BIG;
+    HIA, BIG,;
 
 
     /**
@@ -45,7 +45,7 @@ public enum Instructions {
      * @param arguments the collection of arguments
      * @return the generated instruction as String
      */
-    public static String construct(Instructions instruction, String interpretation, Object... arguments) {
+    public static String construct(Instructions instruction, Interpretation interpretation, Object... arguments) {
         StringBuilder output = new StringBuilder(instruction.toString());
         output.append(interpretation);
         output.append(' ');
