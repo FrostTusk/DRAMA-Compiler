@@ -167,7 +167,7 @@ public class CParser {
 		} catch (NoSuchElementException e) {
 			
 		}
-		return new Program(functions, variables, structs);
+		return new Program(functions, structs, variables);
 	}
 	
 	
