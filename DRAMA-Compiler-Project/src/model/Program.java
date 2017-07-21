@@ -345,7 +345,7 @@ public class Program {
 		String buffer = "";
 		if (globalVarsMap.isEmpty())
 			return buffer;
-		Helper helper = new Helper();
+		Toolbox helper = new Toolbox();
 		for (String globalVar: globalVarsMap.keySet())
 			buffer += globalVar + "VARIABLE" + ": RESGR " + 
 					Integer.toString(helper.getDataTypeSize(getGlobalVariable(globalVar).getDataType())) +"\n ";

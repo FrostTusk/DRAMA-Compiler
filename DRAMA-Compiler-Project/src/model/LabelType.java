@@ -1,11 +1,14 @@
 package model;
 
+/**
+ * Enumeration of the possible types of labels.
+ * @author	Mathijs Hubrechtsen
+ */
 public enum LabelType {
-	IF, 
-	ELSE, 
-	WHILE, 
+	ELSE,
 	FOR,
 	FUNCTION,
+	IF, 
 	VARIABLE,
-	
+	WHILE, 
 }

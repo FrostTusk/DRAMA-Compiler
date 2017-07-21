@@ -1,7 +1,7 @@
 package language.expressions;
 
 import language.DataType;
-import model.Helper;
+import model.Toolbox;
 
 public class VariableExpression implements Expression, Storeable {
 	
@@ -44,8 +44,8 @@ public class VariableExpression implements Expression, Storeable {
 	public String store(Expression expression) throws IllegalArgumentException {
 		if (this.getDataType() != expression.getDataType())
 			throw new IllegalArgumentException();
-		Helper helper = new Helper();
-		String pointletter = helper.getPointLetter(getDataType());
+		Toolbox helper = new Toolbox();
+		String pointletter = helper.getInterpretation(getDataType());
 		
 		if (register)
 			return "HIA" + pointletter + " " + getLocation() + ", " + expression.evaluate();

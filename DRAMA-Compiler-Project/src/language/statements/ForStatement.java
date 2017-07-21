@@ -3,7 +3,7 @@ package language.statements;
 import java.util.List;
 
 import language.Function;
-import model.Helper;
+import model.Toolbox;
 import model.LabelType;
 
 public class ForStatement implements Statement {
@@ -70,7 +70,7 @@ public class ForStatement implements Statement {
 	public void compile() { // TODO Reread HEAP!
 		String label1 = getFunction().requestLabel(LabelType.FOR);
 		String label2 = getFunction().requestLabel(LabelType.FOR);
-		Helper helper = new Helper();
+		Toolbox helper = new Toolbox();
 		helper.setStatement(this);
 		helper.addOutput("BIG " + Integer.toString(start) + ", " + "HEAP"); // TODO Reread HEAP
 		helper.addOutput("BST R0");

@@ -90,7 +90,7 @@ public class Function {
 	}
 	
 	/**
-	 * Get the name of this Function
+	 * Get the name of this Function.
 	 */
 	@Basic @Raw
 	public String getName() {
@@ -185,6 +185,7 @@ public class Function {
 	
 	/**
 	 * Sets the program of this Function to the given program.
+	 * @see	implementation
 	 * @param 	program
 	 * 			The new program of this Function.
 	 */
