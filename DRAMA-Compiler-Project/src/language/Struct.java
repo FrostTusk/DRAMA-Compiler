@@ -1,9 +1,13 @@
 package language;
 
-public class Struct {
-	
+public class Struct implements Compilable {
+	private String name;
 	public String getName() {
-		return null;
+		return this.name;
 	}
-	
+
+	@Override
+	public void compile() {
+
+	}
 }

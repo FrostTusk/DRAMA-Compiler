@@ -19,7 +19,7 @@ import model.Program;
  * @invar	A Program must be able to have each of it's variables as a local variable. 
  * @author	Mathijs Hubrechtsen
  */
-public class Function {
+public class Function implements Compilable {
 	
 	/**
 	 * Create a new Function object with a given statement, name, and parameters.
