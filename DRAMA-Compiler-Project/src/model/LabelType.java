@@ -5,5 +5,7 @@ public enum LabelType {
 	ELSE, 
 	WHILE, 
 	FOR,
+	FUNCTION,
+	VARIABLE,
 	
 }

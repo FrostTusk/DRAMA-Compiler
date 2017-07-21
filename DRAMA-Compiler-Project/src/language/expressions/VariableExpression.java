@@ -1,7 +1,7 @@
 package language.expressions;
 
-import helper.Helper;
 import language.DataType;
+import model.Helper;
 
 public class VariableExpression implements Expression {
 	

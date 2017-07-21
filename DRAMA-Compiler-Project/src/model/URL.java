@@ -3,7 +3,7 @@ package model;
 import be.kuleuven.cs.som.annotate.Value;
 
 /**
- * A class representing a URL.
+ * A class that represents a URL.
  * 
  * @author Mathijs Hubrechtsen
  *

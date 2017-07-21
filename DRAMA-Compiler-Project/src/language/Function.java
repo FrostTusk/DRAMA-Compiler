@@ -106,7 +106,7 @@ public class Function {
 	 * @return
 	 */
 	public String requestLabel(LabelType type) {
-		return getProgram().getLabel(this, type);
+		return getProgram().requestLabel(this, type);
 	}
 	
 	public void compile() {

@@ -5,7 +5,6 @@ import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +37,8 @@ public class Program {
 	 */
 	public Program(List<Function> functions, List<Struct> structs, List<VariableExpression> variables) {
 		this.functionsMap = new HashMap<String, Function>();
-		this.structs = new ArrayList<Struct>();
-		this.globalVars = new ArrayList<VariableExpression>();
+		this.structsMap = new HashMap<String, Struct>();
+		this.globalVarsMap = new HashMap<String, VariableExpression>();
 		setFunctions(functions);
 		setStructs(structs);
 		setGlobalVars(variables);
@@ -54,17 +53,29 @@ public class Program {
 	/**
 	 * A List containing all the structs of this program.
 	 */
-	private List<Struct> structs;
+	private Map<String, Struct> structsMap;
 	/**
 	 * A List containing all the global variables of this program.
 	 */
-	private List<VariableExpression> globalVars;
+	private Map<String, VariableExpression> globalVarsMap;
 
 	
-	public Function getFunction(String name) {
+	public Function getFunction(String name) throws NoSuchElementException {
 		if (!functionsMap.containsKey(name))
 			throw new NoSuchElementException();
 		return functionsMap.get(name);
+	}
+	
+	public Struct getStruct(String name) throws NoSuchElementException {
+		if (!structsMap.containsKey(name))
+			throw new NoSuchElementException();
+		return structsMap.get(name);
+	}
+	
+	public VariableExpression getGlobalVariable(String name) throws NoSuchElementException {
+		if (!globalVarsMap.containsKey(name))
+			throw new NoSuchElementException();
+		return globalVarsMap.get(name);
 	}
 	
 	
@@ -76,15 +87,15 @@ public class Program {
 	}
 	
 	public boolean canHaveAsStruct(Struct struct) {
-		for (Struct ownedStruct: structs)
-			if (ownedStruct.getName().equals(struct.getName()))
+		for (String ownedStruct: structsMap.keySet())
+			if (ownedStruct.equals(struct.getName()))
 				return false;
 		return true;
 	}
 	
 	public boolean canHaveAsGlobalVar(VariableExpression variable) {
-		for (VariableExpression ownedVariable: globalVars)
-			if (ownedVariable.getName().equals(variable.getName()))
+		for (String ownedVariable: globalVarsMap.keySet())
+			if (ownedVariable.equals(variable.getName()))
 				return false;
 		return true;
 	}
@@ -103,19 +114,19 @@ public class Program {
 		}
 	}
 
-	private void setStructs(List<Struct> structs) {
+	private void setStructs(List<Struct> structs) throws IllegalArgumentException {
 		for (Struct struct: structs) {
 			if (!canHaveAsStruct(struct))
 				throw new IllegalArgumentException();
-			this.structs.add(struct);
+			this.structsMap.put(struct.getName(), struct);
 		}
 	}
 	
-	private void setGlobalVars(List<VariableExpression> globalVars) {
+	private void setGlobalVars(List<VariableExpression> globalVars) throws IllegalArgumentException {
 		for (VariableExpression var: globalVars) {
 			if (!canHaveAsGlobalVar(var))
 				throw new IllegalArgumentException();
-			this.globalVars.add(var);
+			this.globalVarsMap.put(var.getName(), var);
 		}
 	}
 
@@ -176,6 +187,37 @@ public class Program {
 
 	
 	
+	private Map<String, Integer> labelsMap;
+	
+	
+	public String requestLabel(Function requester, LabelType type) {
+		int count = labelsMap.get(requester.getName() + type.name());
+		String result = requester.getName() + type + Integer.toString(count);
+		labelsMap.put(requester.getName() + type, count + 1);
+		return result;
+	}
+	
+	
+	private void initializeLabels() {
+		labelsMap = new HashMap<String, Integer>();
+		for (String function: functionsMap.keySet())
+			labelsMap.put(function + LabelType.FUNCTION.name(), 0);
+//		for (String globalVar: globalVarsMap.keySet())
+//			labelsMap.put(globalVar + LabelType.VARIABLE, 0);
+	}
+	
+	
+
+	public String getDRAMAGlobalVars() {
+		String buffer = "";
+		Helper helper = new Helper();
+		for (String globalVar: globalVarsMap.keySet())
+			buffer += globalVar + "VARIABLE" + ": RESGR " + 
+					Integer.toString(helper.getDataTypeSize(getGlobalVariable(globalVar).getDataType())) +"\n ";
+		return buffer.substring(0, buffer.length() - 3);
+	}
+
+	
 	/**
 	 * Compiles this Program Object to a DRAMA program in the file found at the given URL.
 	 * @param 	url
@@ -186,7 +228,7 @@ public class Program {
 	public void compile(URL url) throws FileNotFoundException {
 		outputTracker = "";
 		setURL(url);
-		labelsMap = new HashMap<String, Integer>();
+		initializeLabels();
 		try {
 			getFunction("main").compile();
 		} catch (IllegalArgumentException e) {
@@ -196,20 +238,10 @@ public class Program {
 //			return;
 		}
 		addOutput("STP");
+		addOutput(getDRAMAGlobalVars());
 		addOutput("HEAP: RESGR 200");
 		addOutput("EINDPR");
 		writeOutput();
 	}
-	
-	
-	private Map<String, Integer> labelsMap;
-	
-	public String getLabel(Function requester, LabelType type) {
-		int count = labelsMap.get(requester.getName() + type.name());
-		String result = requester.getName() + type + Integer.toString(count);
-		labelsMap.put(requester.getName() + type, count + 1);
-		return result;
-	}
-	
-	
+		
 }

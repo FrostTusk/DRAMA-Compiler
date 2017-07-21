@@ -1,4 +1,4 @@
-package helper;
+package model;
 
 import language.DataType;
 import language.statements.Statement;
@@ -28,6 +28,13 @@ public class Helper {
 			return ".w";
 		default:
 			return "";
+		}
+	}
+	
+	public int getDataTypeSize(DataType type) {
+		switch(type) {
+		default:
+			return 1;
 		}
 	}
 	

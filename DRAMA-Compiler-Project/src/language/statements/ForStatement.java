@@ -2,8 +2,8 @@ package language.statements;
 
 import java.util.List;
 
-import helper.Helper;
 import language.Function;
+import model.Helper;
 import model.LabelType;
 
 public class ForStatement implements Statement {
