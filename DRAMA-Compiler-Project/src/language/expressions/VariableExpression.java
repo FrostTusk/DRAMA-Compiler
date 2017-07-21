@@ -3,9 +3,10 @@ package language.expressions;
 import language.DataType;
 import model.Helper;
 
-public class VariableExpression implements Expression {
+public class VariableExpression implements Expression, Storeable {
 	
-	public VariableExpression(DataType dataType, String name) {
+	public VariableExpression(boolean register, DataType dataType, String name) {
+		this.register = register;
 		this.dataType = dataType;
 		this.name = name;
 	}
@@ -13,7 +14,7 @@ public class VariableExpression implements Expression {
 	
 	private String location;
 	private final String name;
-	private boolean register;
+	private final boolean register;
 
 
 	public String getLocation() {
@@ -25,14 +26,14 @@ public class VariableExpression implements Expression {
 		return this.name;
 	}
 	
-	public boolean getRegister() {
+	public boolean inRegister() {
 		return register;
 	}
 	
 
-	public void setLocation(String location, boolean register) {
+	public void setLocation(String location/*, boolean register*/) {
 		this.location = location;
-		this.register = register;
+//		this.register = register;
 	}
 	
 	
