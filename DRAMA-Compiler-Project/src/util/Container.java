@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 /**
  *         Interface Container is a container which primitive operation could be executed,
- *         the implementation method can decide which datastructure they used.
+ *         the implementation method can decide which datastructure they use.
  */
 public interface Container<T> {
     public void add(T value);

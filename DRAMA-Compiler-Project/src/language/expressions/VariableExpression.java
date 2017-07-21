@@ -2,6 +2,10 @@ package language.expressions;
 
 import language.DataType;
 import model.Toolbox;
+import language.expressions.Instructions;
+
+import static language.expressions.Instructions.BIG;
+import static language.expressions.Instructions.HIA;
 
 public class VariableExpression implements Storeable {
 	
@@ -44,19 +48,20 @@ public class VariableExpression implements Storeable {
 	public String store(Expression expression) throws IllegalArgumentException {
 		if (this.getDataType() != expression.getDataType())
 			throw new IllegalArgumentException();
-		Toolbox helper = new Toolbox();
-		String pointletter = helper.getInterpretation(getDataType());
-		
-		if (register)
-			return "HIA" + pointletter + " " + getLocation() + ", " + expression.evaluate();
-		return "BIG" + pointletter + " " + expression.evaluate() + ", " + getLocation();
+
+		if (register){
+			return Instructions.construct(HIA, new Toolbox().getInterpretation(getDataType())
+					, getLocation(),expression.evaluate());
+		}
+		return Instructions.construct(BIG, new Toolbox().getInterpretation(getDataType())
+				, expression.evaluate(), getLocation());
 	}
 	
 	
 	public String store(String location) {
 		if (register)
-			return "HIA " + getLocation() + ", " + location;
-		return "BIG" + location + ", " + getLocation();
+			return Instructions.construct(HIA, getLocation(), location);
+		return Instructions.construct(BIG, location, getLocation());
 	}
 	
 	
