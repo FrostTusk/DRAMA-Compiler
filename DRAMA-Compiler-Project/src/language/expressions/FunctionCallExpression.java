@@ -26,11 +26,11 @@ public class FunctionCallExpression implements Expression {
 	
 	
 	/**
-	 * Variable registering the function called by this Function Call Expression.
+	 * Variable containing the function called by this Function Call Expression.
 	 */
 	private final Function call;
 	/**
-	 * List registering the parameters given to this Function Call Expression.
+	 * List containing the parameters given to this Function Call Expression.
 	 */
 	private final List<Storeable> parameters;
 	

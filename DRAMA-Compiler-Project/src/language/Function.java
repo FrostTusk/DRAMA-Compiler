@@ -24,19 +24,22 @@ public class Function implements Compilable {
 	
 	/**
 	 * Create a new Function object with a given statement, name, and parameters.
+	 * @param	dataType
+	 * 			The data type of this Function.
+	 * @param 	parameters
+	 * 			The parameters of this Function.
 	 * @param 	statement
 	 * 			The statement enclosed by this Function.
 	 * @param 	name
 	 * 			The name of this Function.
-	 * @param 	parameters
-	 * 			The parameters of this Function.
 	 * @see	implementation
 	 * @throws	IllegalArgumentException
 	 * 			The Function cannot have each of the given parameters as parameter.
 	 * 			| !for each parameters in parameters: this.canHaveAsParameter(parameter)
 	 */
-	public Function(Statement statement, String name, List<ParameterExpression> parameters) 
+	public Function(DataType dataType, List<ParameterExpression> parameters, Statement statement, String name) 
 				throws IllegalArgumentException {
+		this.dataType = dataType;
 		this.regAmt = 0;
 		this.name = name;
 		this.statement = statement;
@@ -45,6 +48,10 @@ public class Function implements Compilable {
 	}
 	
 	
+	/**
+	 * Variable containing the data type of this Function.
+	 */
+	private final DataType dataType;
 	/**
 	 * Variable containing amount of registers used by this Function.
 	 */
@@ -56,7 +63,7 @@ public class Function implements Compilable {
 	/**
 	 * Map containing the VariableExpressions (local variables) of this Function mapped to their name.
 	 */
-	private Map<String, VariableExpression> localVarsMap;	// FIXME: Name <> Number?
+	private Map<String, VariableExpression> localVarsMap;	// TODO: Name <> Number?
 	/**
 	 * Variable containing the statement enclosed in this Function.
 	 */
@@ -66,6 +73,14 @@ public class Function implements Compilable {
 	 */
 	private final String name;
 	
+	
+	/**
+	 * Get the data type of this Function. 
+	 */
+	@Basic @Raw
+	public DataType getDataType() {
+		return dataType;
+	}
 	
 	/**
 	 * Returns the parameter located at the given number.
@@ -231,13 +246,6 @@ public class Function implements Compilable {
 		for (int i = 0; i < regAmt; i++)
 			getProgram().addOutput("HST R" + Integer.toString(6 - i));
 		getProgram().addOutput("KTG");
-	}
-	
-	
-	
-	// TODO
-	public DataType getDataType() {
-		return null;
 	}
 	
 }

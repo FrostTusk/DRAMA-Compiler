@@ -30,15 +30,15 @@ public class WhileStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering the condition of this While Statement.
+	 * Variable containing the condition of this While Statement.
 	 */
 	private final Compound condition;
 	/**
-	 * List registering the labels used by this While Statement
+	 * List containing the labels used by this While Statement
 	 */
 	private List<String> labels;
 	/**
-	 * Variable registering the body of this While Statement.
+	 * Variable containing the body of this While Statement.
 	 */
 	private final SequenceStatement body;
 	
@@ -81,7 +81,7 @@ public class WhileStatement implements Statement {
 
 	
 	/**
-	 * Variable registering to which Function this Statement belongs.
+	 * Variable containing to which Function this Statement belongs.
 	 */
 	private Function function;
 	

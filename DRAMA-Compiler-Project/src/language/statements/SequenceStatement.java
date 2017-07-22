@@ -25,7 +25,7 @@ public class SequenceStatement implements Statement {
 
 	
 	/**
-	 * Variable registering the statements of this Sequence Statement.
+	 * Variable containing the statements of this Sequence Statement.
 	 */
 	private final List<Statement> statements;
 	
@@ -41,7 +41,7 @@ public class SequenceStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering to which function this Statement belongs.
+	 * Variable containing to which function this Statement belongs.
 	 */
 	private Function function;
 	

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import language.DataType;
 import language.Function;
 import language.Struct;
 import language.expressions.ParameterExpression;
@@ -18,7 +19,7 @@ import util.URL;
 
 /**
  * Class representing a Parser object that parses a C file to
- * a internal representation of a DRAMA program as seen in the SOCS course
+ * an internal representation of a DRAMA program as seen in the SOCS course
  * at KULeuven. The C file needs to use the same C syntax as described in
  * that course.
  * 
@@ -208,7 +209,7 @@ public class CParser {
 	 * @throws	NoSuchElementException
 	 * 			There is no function to be parsed in the current programString.
 	 */
-	private Function parseToFunction(int start) throws IllegalStateException, NoSuchElementException {
+	private Function parseToFunction(DataType dataType, int start) throws IllegalStateException, NoSuchElementException {
 		if (!inFunction || inStruct)
 			throw new IllegalStateException();
 
@@ -223,7 +224,7 @@ public class CParser {
 		if (end == -1)
 			throw new NoSuchElementException();
 		
-		return new Function(parseToStatement(temp, end), name, parameters);
+		return new Function(dataType, parameters, parseToStatement(temp, end), name);
 	}
 	
 	
@@ -307,9 +308,9 @@ public class CParser {
 		if (inFunction || inStruct)
 			throw new IllegalStateException();
 		switch (buffer) {
-			case "def": 
+			case "void": 
 				mineNonWhiteSpace(i);
-				functions.add(parseToFunction(pointer));
+				functions.add(parseToFunction(DataType.VOID, pointer));
 				break;
 			case "struct": 
 				mineNonWhiteSpace(i);

@@ -19,7 +19,7 @@ public class FunctionCallStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering the function call expression of this FunctionCall Statement.
+	 * Variable containing the function call expression of this FunctionCall Statement.
 	 */
 	private final FunctionCallExpression functionCall;
 	
@@ -35,7 +35,7 @@ public class FunctionCallStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering to which Function this Statement belongs.
+	 * Variable containing to which Function this Statement belongs.
 	 */
 	private Function function;
 	

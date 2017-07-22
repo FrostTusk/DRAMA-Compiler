@@ -48,31 +48,31 @@ public class ForStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering the condition of this For Statement.
+	 * Variable containing the condition of this For Statement.
 	 */
 	private final Compound condition;
 	/**
-	 * List registering the labels of this For Statement.
+	 * List containing the labels of this For Statement.
 	 */
 	private List<String> labels;
 	/**
-	 * Variable registering the start of this For Statement.
+	 * Variable containing the start of this For Statement.
 	 */
 	private final Expression start;
 	/**
-	 * Variable registering the end of this For Statement.
+	 * Variable containing the end of this For Statement.
 	 */
 	private final Expression end;
 	/**
-	 * Variable registering the step of this For Statement.
+	 * Variable containing the step of this For Statement.
 	 */
 	private final Expression step;	
 	/**
-	 * Variable registering the storeable of this For Statement.
+	 * Variable containing the storeable of this For Statement.
 	 */
 	private final Storeable storeable;
 	/**
-	 * Variable registering the body of this For Statement.
+	 * Variable containing the body of this For Statement.
 	 */
 	private final SequenceStatement body;
 	
@@ -147,7 +147,7 @@ public class ForStatement implements Statement {
 
 	
 	/**
-	 * Variable registering to which Function this Statement belongs.
+	 * Variable containing to which Function this Statement belongs.
 	 */
 	private Function function;
 	

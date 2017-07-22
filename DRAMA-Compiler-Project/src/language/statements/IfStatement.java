@@ -47,19 +47,19 @@ public class IfStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering the condition of this If Statement.
+	 * Variable containing the condition of this If Statement.
 	 */
 	private final Compound condition;
 	/**
-	 * List registering the labels used by this If Statement
+	 * List containing the labels used by this If Statement
 	 */
 	private List<String> labels;
 	/**
-	 * Variable registering the if part of this If Statement.
+	 * Variable containing the if part of this If Statement.
 	 */
 	private final SequenceStatement ifPart;
 	/**
-	 * Variable registering the else part of this If Statement.
+	 * Variable containing the else part of this If Statement.
 	 */
 	private final SequenceStatement elsePart;
 	
@@ -110,7 +110,7 @@ public class IfStatement implements Statement {
 
 	
 	/**
-	 * Variable registering to which Function this Statement belongs.
+	 * Variable containing to which Function this Statement belongs.
 	 */
 	private Function function;
 	

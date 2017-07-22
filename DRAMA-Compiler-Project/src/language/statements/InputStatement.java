@@ -23,7 +23,7 @@ public class InputStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering the storeable of this Input Statement.
+	 * Variable containing the storeable of this Input Statement.
 	 */
 	private final Storeable storeable;
 	
@@ -39,7 +39,7 @@ public class InputStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering to which Function this Statement belongs.
+	 * Variable containing to which Function this Statement belongs.
 	 */
 	private Function function;
 	

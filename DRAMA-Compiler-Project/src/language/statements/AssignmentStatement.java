@@ -27,11 +27,11 @@ public class AssignmentStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering the expression of this Assignment Statement.
+	 * Variable containing the expression of this Assignment Statement.
 	 */
 	private final Expression expression;
 	/**
-	 * Variable registering the storeable of this Assignment Statement.
+	 * Variable containing the storeable of this Assignment Statement.
 	 */
 	private final Storeable storeable;
 	
@@ -54,7 +54,7 @@ public class AssignmentStatement implements Statement {
 
 
 	/**
-	 * Variable registering to which Function this Statement belongs.
+	 * Variable containing to which Function this Statement belongs.
 	 */
 	private Function function;
 	

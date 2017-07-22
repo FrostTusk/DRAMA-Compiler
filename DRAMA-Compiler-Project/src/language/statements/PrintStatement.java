@@ -23,7 +23,7 @@ public class PrintStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering the expression of this Print Statement.
+	 * Variable containing the expression of this Print Statement.
 	 */
 	private Expression expression;
 	
@@ -39,7 +39,7 @@ public class PrintStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering to which Function this Statement belongs.
+	 * Variable containing to which Function this Statement belongs.
 	 */
 	private Function function;
 	

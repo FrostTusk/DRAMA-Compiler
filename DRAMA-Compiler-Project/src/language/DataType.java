@@ -10,4 +10,5 @@ public enum DataType {
 	POINTER, 
 	STRING, 
 	STRUCT, 
+	VOID,
 }
