@@ -6,6 +6,9 @@ import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 import language.DataType;
 import language.Function;
+import model.Instructions;
+
+import static model.Instructions.HIA;
 
 /**
  * A Class that represents a DRAMA Function Call Expression.
@@ -21,7 +24,6 @@ public class FunctionCallExpression implements Expression {
 	 * 			The function called by this Function Call Expression.
 	 * @param	parameters
 	 * 			The parameters given to this Function Call Expression.	
-	 * @see	implementation
 	 */
 	public FunctionCallExpression(Function call, List<Storeable> parameters) {
 		if (parameters.size() != call.getParameterAmt())
@@ -69,16 +71,18 @@ public class FunctionCallExpression implements Expression {
 	
 	@Override
 	public String evaluate() {
-		String stringBuilder = "";
+		StringBuilder stringBuilder = new StringBuilder();
 		int count = 1;
 		for (int i = 1; i < getParameters().size() + 1; i++) {
-			if (getCall().getParameter(i).inRegister())
-				stringBuilder += "HIA R" + Integer.toString(count++) + ", " + getParameters().get(i).evaluate() + "\n ";
+			if (getCall().getParameter(i).inRegister()){
+				stringBuilder.append(Instructions.construct(HIA, count++, getParameters().get(i).evaluate()));
+
+			}
 			else {
-				stringBuilder += "BST" + "\n "; // FIXME: What to do with structs/arrays?
+				stringBuilder.append(Instructions.construct(Instructions.BST, "") + System.lineSeparator()); // FIXME: What to do with structs/arrays?
 			} // FIXME: command/interpretation
 		} 
-		return stringBuilder;
+		return stringBuilder.toString();
 	}
 
 }

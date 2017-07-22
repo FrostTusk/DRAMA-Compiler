@@ -1,8 +1,10 @@
 package model;
 
+// GNU General Public License
+
 public enum Instructions {
 
-    HIA, BIG,;
+    HIA, BIG, SPR, VSP, BST, STP, EINDPR;
 
 
     /**
@@ -25,6 +27,22 @@ public enum Instructions {
     }
 
     /**
+     * Constructs an instruction and return the generated instruction with accumulator
+     * @param instruction the enumeration of possible Drama instructions
+     * @param interpretation the given interpretation
+     * @param accumulator the accumulator
+     * @param argument the argument
+     * @return the constructed instruction as String
+     */
+    public static String construct(Instructions instruction, Interpretation interpretation, int accumulator, Object argument ) {
+        StringBuilder output = new StringBuilder(instruction.toString());
+        output.append(" " + interpretation);
+        output.append(" R" + accumulator);
+        output.append(", " + argument);
+        return output.toString();
+    }
+
+    /**
      * Constructs an instruction and return the generated instruction
      * @param instruction the enumeration of possible Drama instructions
      * @param arguments the collection of arguments
@@ -40,7 +58,7 @@ public enum Instructions {
     /**
      * Constructs an instruction and return the generated instruction with punctuation and interpretation
      * @param instruction the enumeration of possible Drama instructions
-     * @param interpretation the
+     * @param interpretation the interpretation
      * @param arguments the collection of arguments
      * @return the generated instruction as String
      */
@@ -51,6 +69,8 @@ public enum Instructions {
         output.append(construct(arguments));
         return output.toString();
     }
+
+
     
 }
 

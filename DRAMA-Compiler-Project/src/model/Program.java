@@ -280,7 +280,7 @@ public class Program {
 	/**
 	 * Variable that tracks the compilation output.
 	 */
-	private String outputTracker;
+	private StringBuilder outputTracker;
 	/**
 	 * Variable registering the target (where the output needs to be written) URL of this Program.
 	 */
@@ -297,15 +297,26 @@ public class Program {
 
 
 	/**
-	 * Adds the given result String to the compilation output tracker.
-	 * @param 	result
+	 * Adds the given instruction String to the compilation output tracker.
+	 * @param 	instruction
 	 * 			The String to be added.
-	 * @post	The given result String has been added to the compilation
+	 * @post	The given instruction String has been added to the compilation
 	 * 			output tracker.
 	 */
 	@Raw
-	public void addOutput(String result) {
-		outputTracker += result + "\n ";
+	public void addOutput(String instruction) {
+		outputTracker.append(instruction + System.lineSeparator());
+	}
+
+	/**
+	 * Adds the given instruction String to the compilation output tracker.
+	 * @param 	instruction
+	 * 			The String to be added.
+	 * @post	The given instruction String has been added to the compilation
+	 * 			output tracker.
+	 */
+	public void addOutput(Object instruction){
+		outputTracker.append(instruction + System.lineSeparator());
 	}
 	
 	/**
@@ -368,7 +379,7 @@ public class Program {
 	 */
 	public void compile(URL url) throws IllegalStateException, FileNotFoundException {
 		setURL(url);
-		outputTracker = "";
+		outputTracker = new StringBuilder();
 		initializeLabels();
 		try {
 			getFunction("main").compile();
@@ -382,10 +393,10 @@ public class Program {
 		} catch (NullPointerException e) {
 			throw new IllegalStateException(e);
 		} 
-		addOutput("STP");
+		addOutput(Instructions.STP);
 		addOutput(getDRAMAGlobalVars());
 		addOutput("HEAP: RESGR 200");
-		addOutput("EINDPR");
+		addOutput(Instructions.EINDPR);
 		writeOutput();
 	}
 		
