@@ -211,9 +211,9 @@ public class Function implements Compilable {
 	
 	/**
 	 * Sets the program of this Function to the given program.
-	 * @see	implementation
 	 * @param 	program
 	 * 			The new program of this Function.
+	 * @see	implementation
 	 */
 	public void setProgram(Program program) {
 		this.program = program;

@@ -72,6 +72,7 @@ public class WhileStatement implements Statement {
 	 * Set the labels of this While Statement to the given labels.
 	 * @param 	labels
 	 * 			The new labels of this While Statement.
+	 * @see	implementations
 	 */
 	@Raw
 	public void setLabels(List<String> labels) {

@@ -138,6 +138,7 @@ public class ForStatement implements Statement {
 	 * Set the labels of this For Statement to the given labels.
 	 * @param 	labels
 	 * 			The new labels of this For Statement.
+	 * @see	implementation
 	 */
 	@Raw
 	public void setLabels(List<String> labels) {

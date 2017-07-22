@@ -21,6 +21,9 @@ public interface Statement {
 	 * Set the function of this Statement to the given function.
 	 * @param 	function
 	 * 			The new function of this Statement.
+	 * @post	The Function of this statement is equal to the 
+	 * 			given statement.
+	 * 			| new.getFunction() == function
 	 */
 	@Raw
 	public void setFunction(Function function);

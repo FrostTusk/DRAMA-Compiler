@@ -7,10 +7,16 @@ import be.kuleuven.cs.som.annotate.Raw;
 import language.DataType;
 import language.Function;
 
+/**
+ * A Class that represents a DRAMA Function Call Expression.
+ * A Function Call Expression is created when the output of a
+ * function call is stored in a Storeable.
+ * @author Mathijs Hubrechtsen
+ */
 public class FunctionCallExpression implements Expression {
 
 	/**
-	 * Create a new Function Call Expression object with a given call and parameters
+	 * Create a new Function Call Expression object with a given call and parameters.
 	 * @param	call
 	 * 			The function called by this Function Call Expression.
 	 * @param	parameters

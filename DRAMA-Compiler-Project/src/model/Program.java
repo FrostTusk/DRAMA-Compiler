@@ -313,6 +313,7 @@ public class Program {
 	 * the internal file PrintStream (fileStream).
 	 * @param 	url
 	 * 			The new target URL.
+	 * @see	implementation
 	 * @throws 	FileNotFoundException
 	 * 			The given URL does not point to a valid output path. 
 	 */

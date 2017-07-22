@@ -101,6 +101,7 @@ public class IfStatement implements Statement {
 	 * Set the labels of this If Statement to the given labels.
 	 * @param 	labels
 	 * 			The new labels of this If Statement.
+	 * @see	implementation
 	 */
 	@Raw
 	public void setLabels(List<String> labels) {
