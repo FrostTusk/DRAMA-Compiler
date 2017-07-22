@@ -40,7 +40,7 @@ public class Function implements Compilable {
 		this.regAmt = 0;
 		this.name = name;
 		this.statement = statement;
-		this.parametersMap = new HashMap<String, ParameterExpression>();
+		this.parametersMap = new HashMap<Integer, ParameterExpression>();
 		setParameters(parameters);
 	}
 	
@@ -50,13 +50,13 @@ public class Function implements Compilable {
 	 */
 	private int regAmt;
 	/**
-	 * Map containing the ParametersExpressions (parameters) of this Function mapped to their name.
+	 * Map containing the ParametersExpressions (parameters) of this Function mapped to their number.
 	 */
-	private Map<String, ParameterExpression> parametersMap;
+	private Map<Integer, ParameterExpression> parametersMap;
 	/**
 	 * Map containing the VariableExpressions (local variables) of this Function mapped to their name.
 	 */
-	private Map<String, VariableExpression> localVarsMap;
+	private Map<String, VariableExpression> localVarsMap;	// FIXME: Name <> Number?
 	/**
 	 * Variable containing the statement enclosed in this Function.
 	 */
@@ -68,18 +68,27 @@ public class Function implements Compilable {
 	
 	
 	/**
-	 * Returns the parameter with the given name.
-	 * @param 	name
-	 * 			The name of the parameter to be returned. 
-	 * @return	Returns the parameter with the given name.
+	 * Returns the parameter located at the given number.
+	 * @param 	number
+	 * 			The number of the parameter to be returned. 
+	 * @return	Returns the parameter located at the given name.
 	 * @throws 	NoSuchElementException
 	 * 			There is no parameter with the given name.
 	 */
 	@Raw
-	public ParameterExpression getParameter(String name) throws NoSuchElementException {
-		if (!parametersMap.containsKey(name))
+	public ParameterExpression getParameter(int number) throws NoSuchElementException {
+		if (!parametersMap.containsKey(number))
 			throw new NoSuchElementException();
-		return parametersMap.get(name);
+		return parametersMap.get(number);
+	}
+	
+	/**
+	 * Returns the amount of parameters used by this Function.
+	 * @return	Returns the amount of parameters used by this Function.
+	 */
+	@Raw
+	public int getParameterAmt() {
+		return parametersMap.size();
 	}
 	
 	/**
@@ -108,8 +117,8 @@ public class Function implements Compilable {
 	 */
 	@Raw
 	public boolean canHaveAsParameter(ParameterExpression parameter) {
-		for (String ownedName: parametersMap.keySet())
-			if (ownedName.equals(parameter.getName()))
+		for (ParameterExpression ownedParameter: parametersMap.values())
+			if (ownedParameter.getName().equals(parameter.getName()))
 				return false;
 		return true;
 	}
@@ -164,10 +173,11 @@ public class Function implements Compilable {
 		for (ParameterExpression parameter: parameters) {
 			if (!canHaveAsParameter(parameter))
 				throw new IllegalArgumentException();
-			this.parametersMap.put(parameter.getName(), parameter);
+			this.parametersMap.put(parameter.getNumber(), parameter);
 		}
 	}
 
+	
 	
 	/**
 	 * Variable registering to which Program this Function belongs.
@@ -212,7 +222,7 @@ public class Function implements Compilable {
 	}
 	
 	
-	
+	@Override
 	public void compile() {
 		getProgram().addOutput(requestLabel(LabelType.FUNCTION) + ": NWL");
 		for (int i = 0; i < regAmt; i++)
@@ -221,6 +231,13 @@ public class Function implements Compilable {
 		for (int i = 0; i < regAmt; i++)
 			getProgram().addOutput("HST R" + Integer.toString(6 - i));
 		getProgram().addOutput("KTG");
+	}
+	
+	
+	
+	// TODO
+	public DataType getDataType() {
+		return null;
 	}
 	
 }

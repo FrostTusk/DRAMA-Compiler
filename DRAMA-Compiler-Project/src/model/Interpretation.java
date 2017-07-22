@@ -1,15 +1,15 @@
 package model;
 
-
+/**
+ * Enumeration of the possible types of Interpretation.
+ * @author Jianing Li, Mathijs Hubrechtsen
+ */
 public enum Interpretation {
-    i, a, d, w, none;
+    a, d, i, w, none;
 
     @Override
-    public String toString() {
-        if (this == none){
-            return "";
-        }
-        return "." + super.toString();
+    public String toString() { // TODO: Super or this?
+        return (this == none) ? "": "." + this.name();
     }
     
 }

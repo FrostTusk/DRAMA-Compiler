@@ -28,6 +28,10 @@ public class ParameterExpression implements Storeable {
 	public String getName() {
 		return name;
 	}
+	
+	public int getNumber() {
+		return 0;
+	}
 
 
 
