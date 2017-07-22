@@ -5,7 +5,7 @@ import static model.Instructions.HIA;
 
 import language.DataType;
 import model.Instructions;
-import model.Toolbox;
+import util.Toolbox;
 
 public class VariableExpression implements Storeable {
 	

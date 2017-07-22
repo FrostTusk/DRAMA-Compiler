@@ -15,6 +15,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
 import language.Struct;
 import language.expressions.VariableExpression;
+import util.Toolbox;
 import util.URL;
 
 /**
@@ -270,7 +271,7 @@ public class Program {
 	/**
 	 * Variable registering the console PrintStream.
 	 */
-	@SuppressWarnings("unused") // TODO: Is this ever used?
+	@SuppressWarnings("unused") // TODO: Will this ever be used?
 	private PrintStream consoleStream = new PrintStream(new FileOutputStream(FileDescriptor.out));
 	/**
 	 * Variable registering the file PrintStream of this Program.
@@ -341,7 +342,7 @@ public class Program {
 	 * Get the global variables of this Program in String DRAMA format.
 	 * @see	implementation
 	 * @return	Returns the global variables of this Program in String DRAMA format.
-	 */ // TODO: Better Name, TODO: Fix Sizes.
+	 */ // TODO: Find better method name. TODO: Fix variable sizes.
 	private String getDRAMAGlobalVars() {
 		String buffer = "";
 		if (globalVarsMap.isEmpty())
@@ -375,9 +376,11 @@ public class Program {
 					functionsMap.get(function).compile();
 		} catch (IllegalArgumentException e) {
 			throw new IllegalStateException(e);
+		} catch (NoSuchElementException e) {
+			throw new IllegalStateException(e);
 		} catch (NullPointerException e) {
 			throw new IllegalStateException(e);
-		}
+		} 
 		addOutput("STP");
 		addOutput(getDRAMAGlobalVars());
 		addOutput("HEAP: RESGR 200");

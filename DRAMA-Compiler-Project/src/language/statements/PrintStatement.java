@@ -31,7 +31,7 @@ public class PrintStatement implements Statement {
 	/**
 	 * Get the expression of this Print Statement.
 	 */
-	@Basic
+	@Basic @Raw
 	public Expression getExpression() {
 		return expression;
 	}
@@ -59,10 +59,10 @@ public class PrintStatement implements Statement {
 	
 	/**
 	 * @throws	NullPointerException
-	 * 			The Function of this Statement, or the Program of the Function was null.
+	 * 			The function of this Statement, or the program of the function was null.
 	 * 			| (getFunction() == null) || (getFunction().getProgram() == null)
 	 */
-	@Override
+	@Override @Raw
 	public void compile() throws NullPointerException {
 		getFunction().getProgram().addOutput("DRU " + getExpression().evaluate());
 	}

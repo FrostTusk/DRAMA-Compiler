@@ -1,6 +1,7 @@
 package language.statements;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
@@ -32,7 +33,7 @@ public class SequenceStatement implements Statement {
 	/**
 	 * Get the statements of this Sequence Statement.
 	 */
-	@Basic
+	@Basic @Raw
 	public List<Statement> getStatements() {
 		return statements;
 	}
@@ -40,7 +41,7 @@ public class SequenceStatement implements Statement {
 	
 	
 	/**
-	 * Variable registering to which Function this Statement belongs.
+	 * Variable registering to which function this Statement belongs.
 	 */
 	private Function function;
 	
@@ -59,8 +60,8 @@ public class SequenceStatement implements Statement {
 	}
 
 
-	@Override
-	public void compile() {
+	@Override @Raw
+	public void compile() throws IllegalArgumentException, NoSuchElementException, NullPointerException {
 		for (Statement statement: statements)
 			statement.compile();
 	}

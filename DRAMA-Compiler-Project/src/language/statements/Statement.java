@@ -1,6 +1,9 @@
 package language.statements;
 
+import java.util.NoSuchElementException;
+
 import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
 
 /**
@@ -10,21 +13,22 @@ import language.Function;
 public interface Statement {
 	
 	/**
-	 * Get the Function of this Statement.
+	 * Get the function of this Statement.
 	 */
-	@Basic
+	@Basic @Raw
 	public Function getFunction();
 	/**
-	 * Set the Function of this Statement to the given Function.
+	 * Set the function of this Statement to the given function.
 	 * @param 	function
-	 * 			The new Function of this Statement.
+	 * 			The new function of this Statement.
 	 */
+	@Raw
 	public void setFunction(Function function);
 	/**
 	 * Compiles this statement to it's corresponding DRAMA code.
 	 * @throws IllegalArgumentException
 	 * @throws NullPointerException
 	 */
-	public void compile() throws IllegalArgumentException, NullPointerException;
+	public void compile() throws IllegalArgumentException, NoSuchElementException, NullPointerException;
 	
 }

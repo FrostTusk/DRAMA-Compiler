@@ -39,15 +39,15 @@ public class AssignmentStatement implements Statement {
 	/**
 	 * Get the expression of this Assignment Statement.
 	 */
-	@Basic
+	@Basic @Raw
 	public Expression getExpression() {
 		return expression;
 	}
 	
 	/**
-	 * Get the Storeable of this Assignment Statement.
+	 * Get the storeable of this Assignment Statement.
 	 */
-	@Basic
+	@Basic @Raw
 	public Storeable getStoreable() {
 		return storeable;
 	}
@@ -77,7 +77,7 @@ public class AssignmentStatement implements Statement {
 	 * 		   	The Data Type of the storeable and the expression or incompatible.
 	 * 		  	| storeable.getDataType() != expression.getDataType()
 	 * @throws	NullPointerException
-	 * 			The Function of this Statement, or the Program of the Function was null.
+	 * 			The function of this statement, or the program of the function was null.
 	 * 			| (getFunction() == null) || (getFunction().getProgram() == null)
 	 */
 	@Override @Raw

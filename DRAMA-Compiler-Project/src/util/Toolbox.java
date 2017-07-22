@@ -1,4 +1,4 @@
-package model;
+package util;
 
 import static model.Interpretation.i;
 import static model.Interpretation.none;
@@ -8,6 +8,7 @@ import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 import language.DataType;
 import language.statements.Statement;
+import model.Interpretation;
 
 /**
  * A Toolbox Class containing various methods to simplify the code. 
@@ -49,8 +50,8 @@ public class Toolbox {
 	 * @post	The given result String has been added to the compilation
 	 * 			output tracker.
 	 * @throws	NullPointerException
-	 * 			The Statement of this Toolbox, or the Function of the Statement, or 
-	 * 			the Program of the Function was null.
+	 * 			The statement of this Toolbox, or the function of the statement, or 
+	 * 			the program of the function was null.
 	 * 			| (getStatement() == null) || (getStatement().getFunction() == null) ||
 	 * 			| (getStatement().getFunction().getProgram() == null)
 	 */
@@ -67,8 +68,8 @@ public class Toolbox {
 	 * @post	The given result String has been added to the compilation
 	 * 			output tracker.
 	 * @throws	NullPointerException
-	 * 			The Statement of this Toolbox, or the Function of the Statement, or 
-	 * 			the Program of the Function was null.
+	 * 			The statement of this Toolbox, or the function of the statement, or 
+	 * 			the program of the function was null.
 	 * 			| (statement == null) || (statement.getFunction() == null) ||
 	 * 			| (statement.getFunction().getProgram() == null)
 	 */

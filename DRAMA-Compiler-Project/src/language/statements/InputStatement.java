@@ -29,9 +29,9 @@ public class InputStatement implements Statement {
 	
 	
 	/**
-	 * Get the Storeable of this Input Statement.
+	 * Get the storeable of this Input Statement.
 	 */
-	@Basic
+	@Basic @Raw
 	public Storeable getStoreable() {
 		return storeable;
 	}
@@ -59,10 +59,10 @@ public class InputStatement implements Statement {
 	
 	/**
 	 * @throws	NullPointerException
-	 * 			The Function of this Statement, or the Program of the Function was null.
+	 * 			The function of this Statement, or the program of the function was null.
 	 * 			| (getFunction() == null) || (getFunction().getProgram() == null)
 	 */
-	@Override
+	@Override @Raw
 	public void compile() throws NullPointerException {
 		getFunction().getProgram().addOutput("BST R0");
 		getFunction().getProgram().addOutput("LEZ");
