@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import exceptions.ErrorHandler;
-import exceptions.ErrorType;
 import model.Program;
-import model.URL;
 import parser.CParser;
+import util.ErrorHandler;
+import util.ErrorType;
+import util.URL;
 
 public class Main {
 	

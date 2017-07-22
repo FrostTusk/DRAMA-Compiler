@@ -1,4 +1,4 @@
-package language.expressions;
+package model;
 
 
 public enum Interpretation {
@@ -11,4 +11,5 @@ public enum Interpretation {
         }
         return "." + super.toString();
     }
+    
 }

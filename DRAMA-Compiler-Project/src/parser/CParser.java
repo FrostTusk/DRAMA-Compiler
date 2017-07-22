@@ -14,7 +14,7 @@ import language.expressions.VariableExpression;
 import language.statements.SequenceStatement;
 import language.statements.Statement;
 import model.Program;
-import model.URL;
+import util.URL;
 
 /**
  * Class representing a Parser object that parses a C file to

@@ -7,8 +7,10 @@ import java.util.stream.Stream;
  *         Interface Container is a container which primitive operation could be executed,
  *         the implementation method can decide which datastructure they use.
  */
+@SuppressWarnings("unchecked")
 public interface Container<T> {
-    public void add(T value);
+    
+	public void add(T value);
 
     public default void add(T... values) {
         for (T value : values) {
@@ -18,7 +20,7 @@ public interface Container<T> {
 
     public void remove(T value);
 
-    public default void remove(T... values) {
+	public default void remove(T... values) {
         for (T value : values) {
             remove(value);
         }
@@ -36,4 +38,5 @@ public interface Container<T> {
     }
 
     public int size();
+    
 }

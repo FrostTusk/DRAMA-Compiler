@@ -1,44 +1,72 @@
 package language.statements;
 
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
-import language.expressions.VariableExpression;
+import language.expressions.Storeable;
 
+/**
+ * A Class that represents a DRAMA Input Statement.
+ * @author Mathijs Hubrechtsen
+ */
 public class InputStatement implements Statement {
 
-	public InputStatement(VariableExpression variable) {
-		this.variable = variable;
+	/**
+	 * Create a new Assignment Statement object with a given storeable.
+	 * @param 	storeable
+	 * 			The storeable in which the input will be stored.
+	 * @see	implementation
+	 */
+	public InputStatement(Storeable storeable) {
+		this.storeable = storeable;
 	}
 	
 	
-	private final VariableExpression variable;
+	/**
+	 * Variable registering the storeable of this Input Statement.
+	 */
+	private final Storeable storeable;
 	
 	
-	public VariableExpression getVariable() {
-		return variable;
+	/**
+	 * Get the Storeable of this Input Statement.
+	 */
+	@Basic
+	public Storeable getStoreable() {
+		return storeable;
 	}
 	
 	
 	
+	/**
+	 * Variable registering to which Function this Statement belongs.
+	 */
 	private Function function;
 	
 	
-	@Override
+	@Basic @Override @Raw
 	public Function getFunction() {
 		return function;
 	}
 
-	@Override
+
+	@Override @Raw
 	public void setFunction(Function function) {
 		this.function = function;
 	}
 	
 	
-
+	
+	/**
+	 * @throws	NullPointerException
+	 * 			The Function of this Statement, or the Program of the Function was null.
+	 * 			| (getFunction() == null) || (getFunction().getProgram() == null)
+	 */
 	@Override
-	public void compile() {
+	public void compile() throws NullPointerException {
 		getFunction().getProgram().addOutput("BST R0");
 		getFunction().getProgram().addOutput("LEZ");
-		getFunction().getProgram().addOutput(getVariable().store("R0"));
+		getFunction().getProgram().addOutput(getStoreable().store("R0"));
 		getFunction().getProgram().addOutput("HST R0");
 	}
 

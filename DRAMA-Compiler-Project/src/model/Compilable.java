@@ -1,4 +1,4 @@
-package language;
+package model;
 
 
 public interface Compilable {

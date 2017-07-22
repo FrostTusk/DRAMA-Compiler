@@ -15,6 +15,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
 import language.Struct;
 import language.expressions.VariableExpression;
+import util.URL;
 
 /**
  * A class that represent a DRAMA program.

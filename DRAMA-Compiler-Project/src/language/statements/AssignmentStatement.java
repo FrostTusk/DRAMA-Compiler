@@ -13,11 +13,11 @@ import language.expressions.Storeable;
 public class AssignmentStatement implements Statement {
 
 	/**
-	 * Create a new AssignmentStatement object with a given storeable and expression.
-	 * @param	storeable
-	 * 			The storeable to which the expression is assigned.
+	 * Create a new Assignment Statement object with a given storeable and expression.
 	 * @param 	expression
 	 * 			The expression that will be assigned to the given Storeable.
+	 * @param	storeable
+	 * 			The storeable to which the expression is assigned.
 	 * @see	implementation
 	 */
 	public AssignmentStatement(Storeable storeable, Expression expression) {
@@ -27,14 +27,17 @@ public class AssignmentStatement implements Statement {
 	
 	
 	/**
-	 * 
+	 * Variable registering the expression of this Assignment Statement.
 	 */
 	private final Expression expression;
+	/**
+	 * Variable registering the storeable of this Assignment Statement.
+	 */
 	private final Storeable storeable;
 	
 	
 	/**
-	 * Get the expression of this AssignmentStatement.
+	 * Get the expression of this Assignment Statement.
 	 */
 	@Basic
 	public Expression getExpression() {
@@ -42,7 +45,7 @@ public class AssignmentStatement implements Statement {
 	}
 	
 	/**
-	 * Get the Storeable of this AssignmentStatement.
+	 * Get the Storeable of this Assignment Statement.
 	 */
 	@Basic
 	public Storeable getStoreable() {
@@ -74,10 +77,8 @@ public class AssignmentStatement implements Statement {
 	 * 		   	The Data Type of the storeable and the expression or incompatible.
 	 * 		  	| storeable.getDataType() != expression.getDataType()
 	 * @throws	NullPointerException
-	 * 			The Statement of this Toolbox, or the Function of the Statement, or 
-	 * 			the Program of the Function was null.
-	 * 			| (getStatement() == null) || (getStatement().getFunction() == null) ||
-	 * 			| (getStatement().getFunction().getProgram() == null)
+	 * 			The Function of this Statement, or the Program of the Function was null.
+	 * 			| (getFunction() == null) || (getFunction().getProgram() == null)
 	 */
 	@Override @Raw
 	public void compile() throws IllegalArgumentException, NullPointerException {

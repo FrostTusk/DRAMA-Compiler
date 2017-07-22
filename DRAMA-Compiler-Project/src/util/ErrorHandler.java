@@ -1,4 +1,4 @@
-package exceptions;
+package util;
 
 public class ErrorHandler {
 	

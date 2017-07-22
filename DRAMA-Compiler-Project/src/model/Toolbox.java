@@ -1,14 +1,13 @@
 package model;
 
+import static model.Interpretation.i;
+import static model.Interpretation.none;
+import static model.Interpretation.w;
+
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 import language.DataType;
 import language.statements.Statement;
-import language.expressions.Interpretation;
-
-import static language.expressions.Interpretation.i;
-import static language.expressions.Interpretation.none;
-import static language.expressions.Interpretation.w;
 
 /**
  * A Toolbox Class containing various methods to simplify the code. 

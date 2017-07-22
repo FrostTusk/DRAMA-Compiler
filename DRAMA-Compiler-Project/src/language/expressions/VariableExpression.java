@@ -1,11 +1,11 @@
 package language.expressions;
 
-import language.DataType;
-import model.Toolbox;
-import language.expressions.Instructions;
+import static model.Instructions.BIG;
+import static model.Instructions.HIA;
 
-import static language.expressions.Instructions.BIG;
-import static language.expressions.Instructions.HIA;
+import language.DataType;
+import model.Instructions;
+import model.Toolbox;
 
 public class VariableExpression implements Storeable {
 	

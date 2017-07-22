@@ -10,6 +10,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 import language.expressions.ParameterExpression;
 import language.expressions.VariableExpression;
 import language.statements.Statement;
+import model.Compilable;
 import model.LabelType;
 import model.Program;
 

@@ -1,13 +1,13 @@
 package language;
 
-public class Compound implements Compilable {
+public class Compound {
 	
 	public int getAmount() {
 		return -1;
 	}
 
-	@Override
-	public void compile() {
-
+	// TODO: This is a different compile, this returns a String!
+	public String compile() {
+		return null;
 	}
 }

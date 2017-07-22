@@ -1,5 +1,4 @@
-package language.expressions;
-
+package model;
 
 public enum Instructions {
 
@@ -52,5 +51,6 @@ public enum Instructions {
         output.append(construct(arguments));
         return output.toString();
     }
+    
 }
 

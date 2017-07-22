@@ -1,4 +1,4 @@
-package model;
+package util;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Value;
