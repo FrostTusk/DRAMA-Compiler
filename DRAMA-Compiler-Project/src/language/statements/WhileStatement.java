@@ -103,9 +103,9 @@ public class WhileStatement implements Statement {
 	 * @throws	NoSuchElementException
 	 * 			The necessary labels for this While Statement could not be created.
 	 * @throws	NullPointerException
-	 * 			The function of this Statement, or the program of the function, or if part of this 
+	 * 			The function of this Statement, or the program of the function, or the body of this 
 	 * 			statement was null.
-	 * 			| (getFunction() == null) || (getFunction().getProgram() == null) || (getIfPart().compile())
+	 * 			| (getFunction() == null) || (getFunction().getProgram() == null) || (getBody().compile())
 	 */ // TODO: Labels of the VSP in compound have to be set!
 	@Override @Raw
 	public void compile() throws NoSuchElementException, NullPointerException {

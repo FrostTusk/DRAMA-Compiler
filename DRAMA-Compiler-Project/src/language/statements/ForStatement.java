@@ -1,7 +1,10 @@
 package language.statements;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
 import language.Compound;
 import language.Function;
 import language.expressions.Expression;
@@ -9,90 +12,180 @@ import language.expressions.Storeable;
 import model.LabelType;
 import util.Toolbox;
 
+/**
+ * A Class that represents a DRAMA For Statement.
+ * @author Mathijs Hubrechtsen
+ */
 public class ForStatement implements Statement {
-
-	public ForStatement(Storeable storeable, Expression start, Expression end, Expression step, Compound condition, 
-			SequenceStatement body) {
-		this.storeable = storeable;
-		this.body = body;
+	
+	/**
+	 * Create a new For Statement object with a given condition, start, end, 
+	 * step, body, and storeable.
+	 * @param 	condition
+	 * 			The condition of this For Statement.
+	 * @param 	start
+	 * 			The start of this For Statement.
+	 * @param 	end
+	 * 			The end of this For Statement.
+	 * @param 	step
+	 * 			The step of this For Statement.
+	 * @param 	body
+	 * 			The body of this For Statement.
+	 * @param 	storeable
+	 * 			The storeable used to hold the counter of
+	 * 			this For Statement.
+	 */
+	public ForStatement(Compound condition,  Expression start, Expression end, Expression step, 
+			SequenceStatement body, Storeable storeable) {
+		this.condition = condition;
 		this.start = start;
 		this.end = end;
 		this.step = step;
-		this.condition = condition;
+		this.storeable = storeable;
+		this.body = body;
 	}
 	
 	
-	private final Storeable storeable;
-	private final Expression start;
-	private final Expression end;
-	private final Expression step;	
+	/**
+	 * Variable registering the condition of this For Statement.
+	 */
 	private final Compound condition;
+	/**
+	 * List registering the labels of this For Statement.
+	 */
 	private List<String> labels;
+	/**
+	 * Variable registering the start of this For Statement.
+	 */
+	private final Expression start;
+	/**
+	 * Variable registering the end of this For Statement.
+	 */
+	private final Expression end;
+	/**
+	 * Variable registering the step of this For Statement.
+	 */
+	private final Expression step;	
+	/**
+	 * Variable registering the storeable of this For Statement.
+	 */
+	private final Storeable storeable;
+	/**
+	 * Variable registering the body of this For Statement.
+	 */
 	private final SequenceStatement body;
-
 	
-	public Storeable getStoreable() {
-		return storeable;
+	
+	/**
+	 * Get the condition of this For Statement.
+	 */
+	@Basic @Raw
+	public Compound getCondition() {
+		return condition;
 	}
 	
+	/**
+	 * Get the labels of this For Statement.
+	 */
+	@Basic @Raw
+	public List<String> getLabels() {
+		return labels;
+	}
+
+	/**
+	 * Get the start of this For Statement.
+	 */
+	@Basic @Raw
 	public Expression getStart() {
 		return start;
 	}
 	
+	/**
+	 * Get the end of this For Statement.
+	 */
+	@Basic @Raw
 	public Expression getEnd() {
 		return end;
 	}
 	
+	/**
+	 * Get the step of this For Statement.
+	 */
+	@Basic @Raw
 	public Expression getStep() {
 		return step;
 	}
 	
-	public List<String> getLabels() {
-		return this.labels;
-	}
-
+	/**
+	 * Get the body of this For Statement.
+	 */
+	@Basic @Raw
 	public SequenceStatement getBody() {
 		return body;
 	}
 
+	/**
+	 * Get the storeable of this For Statement.
+	 */
+	@Basic @Raw
+	public Storeable getStoreable() {
+		return storeable;
+	}
+
 	
+	/**
+	 * Set the labels of this For Statement to the given labels.
+	 * @param 	labels
+	 * 			The new labels of this For Statement.
+	 */
+	@Raw
 	public void setLabels(List<String> labels) {
 		this.labels = labels;
 	}
 
 
 	
+	/**
+	 * Variable registering to which Function this Statement belongs.
+	 */
 	private Function function;
 	
 	
-	@Override
+	@Basic @Override @Raw
 	public Function getFunction() {
 		return function;
 	}
 
-	
-	@Override
+
+	@Override @Raw
 	public void setFunction(Function function) {
 		this.function = function;
 	}
 
 	
 	
-	@Override
-	public void compile() { // TODO Fix this.
-		String label1 = getFunction().requestLabel(LabelType.FOR);
-		String label2 = getFunction().requestLabel(LabelType.FOR);
-		Toolbox helper = new Toolbox();
-		helper.setStatement(this);
-		helper.addOutput(getStoreable().store(getStart()));
-		helper.addOutput(label1 + "BST R0");
-		helper.addOutput("HIA R0, " + getStoreable().evaluate());
-		helper.addOutput("VGL R0, " + getEnd().evaluate());
-		helper.addOutput("HST R0");
-		helper.addOutput("VSP " + condition.compile() + label2);
+	/**
+	 * @throws	NoSuchElementException
+	 * 			The necessary labels for this For Statement could not be created.
+	 * @throws	NullPointerException
+	 * 			The function of this Statement, or the program of the function, or the body of this 
+	 * 			statement was null.
+	 * 			| (getFunction() == null) || (getFunction().getProgram() == null) || (getBody().compile())
+	 */ // TODO: Labels of the VSP in compound have to be set!
+	@Override @Raw
+	public void compile() throws NoSuchElementException, NullPointerException {
+		String label = getFunction().requestLabel(LabelType.FOR);
+		Toolbox toolbox = new Toolbox();
+		toolbox.setStatement(this);
+		toolbox.addOutput(getStoreable().store(getStart()));
+		toolbox.addOutput(label + "BST R0");
+		toolbox.addOutput("HIA R0, " + getStoreable().evaluate());
+		toolbox.addOutput("VGL R0, " + getEnd().evaluate()); // FIXME: Interpretation.
+		toolbox.addOutput("HST R0");
+		toolbox.addOutput(condition.compile());
 		getBody().compile();
-		helper.addOutput("SPR " + label1);
-		helper.addOutput(label2 + ": NWL");
+		toolbox.addOutput("SPR " + label);
+		toolbox.addOutput(getLabels().get(getLabels().size() - 1) + ": NWL");
 	}
 	
 }
