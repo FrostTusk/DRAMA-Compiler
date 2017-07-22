@@ -2,26 +2,31 @@ package language.statements;
 
 import java.util.List;
 
+import language.Compound;
 import language.Function;
+import language.expressions.Expression;
 import language.expressions.Storeable;
 import model.LabelType;
 import util.Toolbox;
 
 public class ForStatement implements Statement {
 
-	public ForStatement(Storeable storeable, int start, int end, int step, SequenceStatement body) {
+	public ForStatement(Storeable storeable, Expression start, Expression end, Expression step, Compound condition, 
+			SequenceStatement body) {
 		this.storeable = storeable;
 		this.body = body;
 		this.start = start;
 		this.end = end;
 		this.step = step;
+		this.condition = condition;
 	}
 	
 	
 	private final Storeable storeable;
-	private final int start;
-	private final int end;
-	private final int step;	
+	private final Expression start;
+	private final Expression end;
+	private final Expression step;	
+	private final Compound condition;
 	private List<String> labels;
 	private final SequenceStatement body;
 
@@ -30,15 +35,15 @@ public class ForStatement implements Statement {
 		return storeable;
 	}
 	
-	public int getStart() {
+	public Expression getStart() {
 		return start;
 	}
 	
-	public int getEnd() {
+	public Expression getEnd() {
 		return end;
 	}
 	
-	public int getStep() {
+	public Expression getStep() {
 		return step;
 	}
 	
@@ -74,26 +79,19 @@ public class ForStatement implements Statement {
 	
 	
 	@Override
-	public void compile() { // TODO Reread HEAP!
+	public void compile() { // TODO Fix this.
 		String label1 = getFunction().requestLabel(LabelType.FOR);
 		String label2 = getFunction().requestLabel(LabelType.FOR);
 		Toolbox helper = new Toolbox();
 		helper.setStatement(this);
-		helper.addOutput("HIA R0, " + storeable.evaluate());
-		helper.addOutput("BIG " + Integer.toString(start) + ", " + "HEAP"); // TODO Reread HEAP
-		helper.addOutput("BST R0");
-		helper.addOutput("HIA R0, HEAP");
-		helper.addOutput("OPT.w R0, 1");
-		helper.addOutput("BIG R0, HEAP");
+		helper.addOutput(getStoreable().store(getStart()));
+		helper.addOutput(label1 + "BST R0");
+		helper.addOutput("HIA R0, " + getStoreable().evaluate());
+		helper.addOutput("VGL R0, " + getEnd().evaluate());
 		helper.addOutput("HST R0");
-		helper.addOutput(label1 + ": NWL");
-		helper.addOutput("VGL R7"); // TODO Reread HEAP
-		helper.addOutput("VSP GRG, " + label2);
+		helper.addOutput("VSP " + condition.compile() + label2);
 		getBody().compile();
-		helper.addOutput("HIA R7");
-		helper.addOutput("OPT");
-		helper.addOutput("BIG R7");
-		getFunction().getProgram().addOutput("SPR " + label1);
+		helper.addOutput("SPR " + label1);
 		helper.addOutput(label2 + ": NWL");
 	}
 	
