@@ -1,5 +1,7 @@
 package model;
 
+import language.expressions.Expression;
+
 // GNU General Public License
 
 public enum Instructions {
@@ -34,11 +36,11 @@ public enum Instructions {
      * @param argument the argument
      * @return the constructed instruction as String
      */
-    public static String construct(Instructions instruction, Interpretation interpretation, int accumulator, Object argument ) {
+    public static String construct(Instructions instruction, Interpretation interpretation, int accumulator, Expression argument ) {
         StringBuilder output = new StringBuilder(instruction.toString());
         output.append(" " + interpretation);
         output.append(" R" + accumulator);
-        output.append(", " + argument);
+        output.append(", " + argument.evaluate());
         return output.toString();
     }
 
@@ -70,7 +72,5 @@ public enum Instructions {
         return output.toString();
     }
 
-
-    
 }
 

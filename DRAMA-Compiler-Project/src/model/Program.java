@@ -311,12 +311,12 @@ public class Program {
 	/**
 	 * Adds the given instruction String to the compilation output tracker.
 	 * @param 	instruction
-	 * 			The String to be added.
+	 * 			The intstruction to be added.
 	 * @post	The given instruction String has been added to the compilation
 	 * 			output tracker.
 	 */
 	public void addOutput(Object instruction){
-		outputTracker.append(instruction + System.lineSeparator());
+		outputTracker.append(instruction.toString() + System.lineSeparator());
 	}
 	
 	/**
