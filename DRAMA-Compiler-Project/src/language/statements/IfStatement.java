@@ -7,7 +7,6 @@ import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 import language.Compound;
 import language.Function;
-import model.Instructions;
 import model.LabelType;
 
 /**
@@ -144,7 +143,8 @@ public class IfStatement implements Statement {
 		getIfPart().compile();
 		if (getElsePart() != null) {
 			String label = getFunction().requestLabel(LabelType.ELSE);
-			getFunction().getProgram().addOutput(Instructions.construct(Instructions.SPR, label));
+			getFunction().getProgram().addOutput("SPR: " + label);
+//			getFunction().getProgram().addOutput(Instructions.construct(Instructions.SPR, label));
 			getFunction().getProgram().addOutput(getLabels().get(getLabels().size() - 1) + ": NWL");
 			getElsePart().compile();
 			getFunction().getProgram().addOutput(label + ": NWL");

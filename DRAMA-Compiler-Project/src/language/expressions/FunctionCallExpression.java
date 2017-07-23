@@ -6,9 +6,6 @@ import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 import language.DataType;
 import language.Function;
-import model.Instructions;
-
-import static model.Instructions.HIA;
 
 /**
  * A Class that represents a DRAMA Function Call Expression.
@@ -73,15 +70,22 @@ public class FunctionCallExpression implements Expression {
 	public String evaluate() {
 		StringBuilder stringBuilder = new StringBuilder();
 		int count = 1;
+		stringBuilder.append("BST R0");
 		for (int i = 1; i < getParameters().size() + 1; i++) {
-			if (getCall().getParameter(i).inRegister()){
-				stringBuilder.append(Instructions.construct(HIA, count++, getParameters().get(i).evaluate()));
-
+			if (getCall().getParameter(i).inRegister()) {
+				stringBuilder.append("BST R" + Integer.toString(i));
+				stringBuilder.append("HIA R" + Integer.toString(count++) + getParameters().get(i).evaluate() + System.lineSeparator());
 			}
-			else {
-				stringBuilder.append(Instructions.construct(Instructions.BST, "") + System.lineSeparator()); // FIXME: What to do with structs/arrays?
-			} // FIXME: command/interpretation
 		} 
+		for (int i = 0; i < getParameters().size() + 1; i++) {
+			if (!getCall().getParameter(i).inRegister()) {
+				stringBuilder.append("HIA: R0, " + getParameters().get(i).evaluate() + System.lineSeparator());
+				stringBuilder.append("BST R0" + System.lineSeparator()); // TODO: Structs/Arrays
+			}
+		}
+		stringBuilder.append("SBR " + getCall().getName() + "-FUNCTION");
+		stringBuilder.append("OPT.w R9, " + Integer.toString(getParameters().size() - count)); // TODO: Structs.Arrays
+		stringBuilder.append("HST R0");
 		return stringBuilder.toString();
 	}
 

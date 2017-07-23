@@ -246,7 +246,6 @@ public class Program {
 	public String requestLabel(Function requester, LabelType type) throws NoSuchElementException, NullPointerException {
 		if ((labelsMap == null) || (!labelsMap.containsKey(requester.getName() + type.name())))
 				throw new NoSuchElementException();
-		
 		int count = labelsMap.get(requester.getName() + type.name());
 		String result = requester.getName() + type + Integer.toString(count);
 		labelsMap.put(requester.getName() + type, count + 1);
@@ -263,7 +262,7 @@ public class Program {
 	private void initializeLabels() {
 		labelsMap = new HashMap<String, Integer>();
 		for (String function: functionsMap.keySet())
-			labelsMap.put(function + LabelType.FUNCTION.name(), 0);
+			labelsMap.put(function + "-" + LabelType.FUNCTION.name(), 0);
 	}
 
 	
@@ -361,7 +360,7 @@ public class Program {
 			return buffer;
 		Toolbox helper = new Toolbox();
 		for (String globalVar: globalVarsMap.keySet())
-			buffer += globalVar + "VARIABLE" + ": RESGR " + 
+			buffer += globalVar + "-VARIABLE" + ": RESGR " + 
 					Integer.toString(helper.getDataTypeSize(getGlobalVariable(globalVar).getDataType())) +"\n ";
 		return buffer.substring(0, buffer.length() - 3);
 	}
@@ -393,10 +392,10 @@ public class Program {
 		} catch (NullPointerException e) {
 			throw new IllegalStateException(e);
 		} 
-		addOutput(Instructions.STP);
+		addOutput("STP");
 		addOutput(getDRAMAGlobalVars());
 		addOutput("HEAP: RESGR 200");
-		addOutput(Instructions.EINDPR);
+		addOutput("EINDPR");
 		writeOutput();
 	}
 		

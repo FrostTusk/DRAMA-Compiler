@@ -239,9 +239,10 @@ public class Function implements Compilable {
 	
 	@Override
 	public void compile() {
-		getProgram().addOutput(requestLabel(LabelType.FUNCTION) + ": NWL");
+		getProgram().addOutput(getName() + "-FUNCTION" + ": NWL");
 		for (int i = 0; i < regAmt; i++)
 			getProgram().addOutput("BST R" + Integer.toString(6 - i));
+		// TODO: AFT.w R9, variables.size() 
 		getStatement().compile();
 		for (int i = 0; i < regAmt; i++)
 			getProgram().addOutput("HST R" + Integer.toString(6 - i));
