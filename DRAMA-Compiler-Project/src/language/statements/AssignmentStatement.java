@@ -74,7 +74,7 @@ public class AssignmentStatement implements Statement {
 
 	/**
 	 * @throws	IllegalArgumentException
-	 * 		   	The Data Type of the storeable and the expression or incompatible.
+	 * 		   	The Data Type of the storeable and the expression are incompatible.
 	 * 		  	| storeable.getDataType() != expression.getDataType()
 	 * @throws	NullPointerException
 	 * 			The function of this statement, or the program of the function was null.

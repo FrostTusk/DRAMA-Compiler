@@ -36,7 +36,7 @@ public class PrimitiveExpression implements Expression {
 	private String value;
 	
 	
-	@Override
+	@Basic @Override @Raw
 	public DataType getDataType() {
 		return dataType;
 	}
