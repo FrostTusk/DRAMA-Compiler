@@ -4,6 +4,7 @@ import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
 import language.expressions.Expression;
+import util.Toolbox;
 
 /**
  * A Class that represents a DRAMA Print Statement.
@@ -66,7 +67,8 @@ public class PrintStatement implements Statement {
 	 */
 	@Override @Raw
 	public void compile() throws NullPointerException {
-		getFunction().getProgram().addOutput("DRU " + getExpression().evaluate());
+		getFunction().getProgram().addOutput("DRU" + new Toolbox().getInterpretation(getExpression().getDataType()) 
+				+ getExpression().evaluate());
 	}
 
 }

@@ -8,7 +8,7 @@ public enum Interpretation {
     a, d, i, w, none;
 
     @Override
-    public String toString() { // TODO: Super or this?
+    public String toString() {
         return (this == none) ? "": "." + this.name();
     }
     

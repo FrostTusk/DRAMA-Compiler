@@ -4,6 +4,9 @@ import language.expressions.Expression;
 
 // GNU General Public License
 
+/**
+ * @author Jianing Li
+ */
 public enum Instructions {
 
     HIA, BIG, SPR, VSP, BST, STP, EINDPR;

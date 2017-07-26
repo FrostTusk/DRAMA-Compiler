@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 /**
  *         Interface Container is a container which primitive operation could be executed,
  *         the implementation method can decide which datastructure they use.
+ *         @author Jianing Li
  */
 @SuppressWarnings("unchecked")
 public interface Container<T> {
