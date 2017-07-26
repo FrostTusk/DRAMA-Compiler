@@ -59,8 +59,10 @@ public class PrintStatement implements Statement {
 	
 	/**
 	 * @throws	NullPointerException
-	 * 			The function of this Statement, or the program of the function was null.
-	 * 			| (getFunction() == null) || (getFunction().getProgram() == null)
+	 * 			The function of this Statement, or the program of the function was null, or the
+	 * 			expression of this Statement was null.
+	 * 			| (getFunction() == null) || (getFunction().getProgram() == null) ||
+	 * 			| (getExpression().evaluate() == null)
 	 */
 	@Override @Raw
 	public void compile() throws NullPointerException {

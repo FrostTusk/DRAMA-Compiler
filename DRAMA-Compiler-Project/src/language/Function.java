@@ -42,6 +42,7 @@ public class Function implements Compilable {
 		this.dataType = dataType;
 		this.regAmt = 0;
 		this.name = name;
+		statement.setFunction(this);
 		this.statement = statement;
 		this.parametersMap = new HashMap<Integer, ParameterExpression>();
 		setParameters(parameters);
@@ -246,7 +247,8 @@ public class Function implements Compilable {
 		getStatement().compile();
 		for (int i = 0; i < regAmt; i++)
 			getProgram().addOutput("HST R" + Integer.toString(6 - i));
-		getProgram().addOutput("KTG");
+		if (getName() != "main")
+			getProgram().addOutput("KTG");
 	}
 	
 }

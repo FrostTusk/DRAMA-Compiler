@@ -111,4 +111,25 @@ public class Toolbox {
 		}
 	}
 	
+	
+	// TODO: Documentation
+	public void printStringDifferences(String string1, String string2) {
+		if (string1.equals(string2))
+			System.out.println("string1 EQUALS string2");
+		else
+			System.out.println("string1 DOES NOT EQUAL string 2");
+		for (int i = 0; i < string1.length(); i++)
+			if (string1.charAt(i) != string2.charAt(i)) {
+				if (Character.toString(string1.charAt(i)).equals("\r") || 
+						Character.toString(string1.charAt(i)).equals("\n"))
+					System.out.format("lineSeparator != %s" + System.lineSeparator(), Character.toString(string2.charAt(i)));
+				else if (Character.toString(string2.charAt(i)).equals("\r") || 
+						Character.toString(string2.charAt(i)).equals("\n"))
+					System.out.format("%s != lineSaperator" + System.lineSeparator(), Character.toString(string1.charAt(i)));
+				else
+					System.out.format("%s != %s" + System.lineSeparator()
+					, Character.toString(string1.charAt(i)), Character.toString(string2.charAt(i)));
+			}
+	}
+	
 }

@@ -177,6 +177,7 @@ public class Program {
 			if (!canHaveAsFunction(function))
 				throw new IllegalArgumentException();
 			functionsMap.put(function.getName(), function);
+			function.setProgram(this);
 		}
 		try {
 			getFunction("main");
@@ -285,6 +286,14 @@ public class Program {
 	 */
 	private URL url;
 	
+	
+	/**
+	 * Get the current output of this Program.
+	 */
+	@Basic @Raw
+	public String getOutput() {
+		return outputTracker.toString();
+	}
 	
 	/**
 	 * Get the target URL of this Program.
@@ -397,6 +406,30 @@ public class Program {
 		addOutput("HEAP: RESGR 200");
 		addOutput("EINDPR");
 		writeOutput();
+	}
+	
+	/**
+	 * TODO: THIS IS A TEST METHOD.
+	 */
+	public void compile() throws IllegalStateException {
+		outputTracker = new StringBuilder();
+		initializeLabels();
+		try {
+			getFunction("main").compile();
+			for (String function: functionsMap.keySet())
+				if (!function.equals("main"))
+					functionsMap.get(function).compile();
+		} catch (IllegalArgumentException e) {
+			throw new IllegalStateException(e);
+		} catch (NoSuchElementException e) {
+			throw new IllegalStateException(e);
+		} catch (NullPointerException e) {
+			throw new IllegalStateException(e);
+		} 
+		addOutput("STP");
+		addOutput(getDRAMAGlobalVars());
+		addOutput("HEAP: RESGR 200");
+		addOutput("EINDPR");
 	}
 		
 }
