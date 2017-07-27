@@ -12,7 +12,9 @@ import org.junit.Test;
 import language.expressions.ParameterExpression;
 import language.expressions.PrimitiveExpression;
 import language.expressions.VariableExpression;
+import language.statements.InputStatement;
 import language.statements.PrintStatement;
+import language.statements.SequenceStatement;
 import language.statements.Statement;
 import model.Program;
 import util.Toolbox;
@@ -46,21 +48,42 @@ public class TestProgram {
 
 	
 	@Test
-	public void testPrint() {
-		reset();
-		Statement statement = new PrintStatement(new VariableExpression(true, DataType.INT, 1, "TEST"));
+	public void testPrintBasic() {
+		reset();		
+		Statement statement = new PrintStatement(new PrimitiveExpression(DataType.INT, "100"));
 		functions.add(new Function(DataType.VOID, parameters, statement, "main"));
 		program = new Program(functions, structs, variables);
 		program.compile();
-		String expected = "DRU.w null" + System.lineSeparator();
+		String expected = "DRU.w 100" + System.lineSeparator();
 		assertSameString(debug, print, program.getOutput(), prologue + expected + epilogue);
-		
-		functions.clear();
-		statement = new PrintStatement(new PrimitiveExpression(DataType.INT, "300"));
+	}
+	
+	@Test
+	public void testSequenceBasic() {
+		reset();
+		List<Statement> statements = new ArrayList<Statement>();
+		statements.add(new PrintStatement(new PrimitiveExpression(DataType.INT, "100")));
+		statements.add(new PrintStatement(new PrimitiveExpression(DataType.INT, "200")));
+		Statement statement = new SequenceStatement(statements);
 		functions.add(new Function(DataType.VOID, parameters, statement, "main"));
 		program = new Program(functions, structs, variables);
 		program.compile();
-		expected = "DRU.w 300" + System.lineSeparator();
+		String expected = "DRU.w 100" + System.lineSeparator() + "DRU.w 200" + System.lineSeparator();
+		assertSameString(debug, print, program.getOutput(), prologue + expected + epilogue);
+	}
+	
+	@Test
+	public void testInputBasic() {
+		reset();
+		VariableExpression variable = new VariableExpression(false, DataType.INT, 5, "MAGEENBEKKKE");
+		Statement statement = new InputStatement(variable);
+		Function function = new Function(DataType.VOID, parameters, statement, "main");
+		function.addLocalVariable(variable);
+		functions.add(function);
+		program = new Program(functions, structs, variables);
+		program.compile();
+		String expected = "BST R0" + System.lineSeparator() + "LEZ" + System.lineSeparator() +
+						"BIG R0, null" + System.lineSeparator() + "HST R0" + System.lineSeparator();
 		assertSameString(debug, print, program.getOutput(), prologue + expected + epilogue);
 	}
 	

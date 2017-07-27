@@ -111,17 +111,17 @@ public class VariableExpression implements Storeable {
 			throw new IllegalArgumentException();
 
 		if (register)
-			return "HIA" + new Toolbox().getInterpretation(getDataType()) + getLocation() +
-					expression.evaluate();
-		return "BIG" + new Toolbox().getInterpretation(getDataType()) + getLocation() +
-				expression.evaluate();
+			return "HIA" + new Toolbox().getInterpretation(getDataType()) + getLocation()
+					+ ", " + expression.evaluate();
+		return "BIG" + new Toolbox().getInterpretation(getDataType()) + getLocation()
+				+ ", " + expression.evaluate();
 	}
 	
 	@Override @Raw
 	public String store(String location) {
 		if (register)
-			return "HIA" + getLocation() + location;
-		return "BIG" + getLocation() + location;
+			return "HIA " + getLocation() + ", " + location;
+		return "BIG " + location + ", " + getLocation();
 	}
 	
 	

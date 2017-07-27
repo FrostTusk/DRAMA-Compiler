@@ -44,8 +44,9 @@ public class Function implements Compilable {
 		this.name = name;
 		statement.setFunction(this);
 		this.statement = statement;
-		this.parametersMap = new HashMap<Integer, ParameterExpression>();
+		parametersMap = new HashMap<Integer, ParameterExpression>();
 		setParameters(parameters);
+		localVarsMap = new HashMap<String, VariableExpression>();
 	}
 	
 	
