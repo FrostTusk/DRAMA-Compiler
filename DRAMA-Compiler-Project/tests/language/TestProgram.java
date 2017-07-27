@@ -75,7 +75,7 @@ public class TestProgram {
 	@Test
 	public void testInputBasic() {
 		reset();
-		VariableExpression variable = new VariableExpression(false, DataType.INT, 5, "MAGEENBEKKKE");
+		VariableExpression variable = new VariableExpression(false, DataType.INT, 100, "variable");
 		Statement statement = new InputStatement(variable);
 		Function function = new Function(DataType.VOID, parameters, statement, "main");
 		function.addLocalVariable(variable);

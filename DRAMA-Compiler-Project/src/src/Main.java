@@ -17,11 +17,12 @@ public class Main {
 	
 	private static CParser parser = new CParser();
 	private static ErrorHandler errorHandler = new ErrorHandler();
-	private static Scanner scanner;
+	private static Scanner scanner = new Scanner(System.in);
 	
 
 	public static void main(String[] args) {
-		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+//		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+		System.out.println("DRAMA-Compiler, v.27/07/2017");
 		try {
 			handleArgs(args[0], args[1]);
 		} catch (IndexOutOfBoundsException exc) {
@@ -92,13 +93,12 @@ public class Main {
 		System.out.println("Type help() for help, quit() to quit");
 		URL input = null, output = null;
 		boolean inputSet = false, outputSet = false;
-		scanner = new Scanner(System.in);
 		
 		while (!inputSet) {
 			System.out.format("Enter target input file: ");
 			String buffer = scanner.nextLine();
 			if (buffer.equals("quit()")) {
-				System.out.println("Quitting...");
+				System.out.format("Quitting...");
 				return;
 			} else if (buffer.equals("help()")) {
 				handleHelp();
@@ -121,7 +121,7 @@ public class Main {
 			System.out.format("Enter target output file: ");
 			String buffer = scanner.nextLine();
 			if (buffer.equals("quit()")) {
-				System.out.println("Quitting...");
+				System.out.format("Quitting...");
 				return;
 			} else if (buffer.equals("help()")) {
 				handleHelp();

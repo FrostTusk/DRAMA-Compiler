@@ -252,4 +252,10 @@ public class Function implements Compilable {
 			getProgram().addOutput("KTG");
 	}
 	
+
+	// TODO: Finish this.
+	public void initializeLocalVariables() {
+//		for (VariableExpression variable: localVarsMap)
+	}
+	
 }
