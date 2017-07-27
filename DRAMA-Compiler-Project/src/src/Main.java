@@ -82,7 +82,7 @@ public class Main {
 		} catch (IOException e) {
 			errorHandler.handleIOError(ErrorType.UNKOWNIO);
 		} catch (RuntimeException e) {
-			System.out.println("Not Implemented."); // TODO
+			System.out.println("Not Implemented."); // TODO: N/A
 		}		
 	}
 	
@@ -152,7 +152,7 @@ public class Main {
 		} catch (IOException e) {
 			errorHandler.handleIOError(ErrorType.UNKOWNIO);
 		} catch (RuntimeException e) {
-			System.out.println("Not Implemented.");	// TODO
+			System.out.println("Not Implemented.");	// TODO: N/A
 		}		
 	}
 	
