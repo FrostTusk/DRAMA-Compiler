@@ -23,11 +23,17 @@ public class Main {
 	public static void main(String[] args) {
 //		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		System.out.println("DRAMA-Compiler, v.27/07/2017");
-		try {
-			handleArgs(args[0], args[1]);
-		} catch (IndexOutOfBoundsException exc) {
+		if (args.length == 0)
 			handleNoArgs();
-		}
+		else if (args.length == 2)
+			handleArgs(args[0], args[1]);
+		else
+			System.out.format("Invalid number of arguments given.");
+//		try {
+//			handleArgs(args[0], args[1]);
+//		} catch (IndexOutOfBoundsException exc) {
+//			handleNoArgs();
+//		}
 		scanner.close();
 	}
 	
