@@ -5,11 +5,9 @@ Compiles C code to DRAMA assembly
 
 ### Prerequisites
 
-```
-1. [Eclipse](http://www.eclipse.org/downloads/eclipse-packages/)
-2. [Java](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
-3. [JUnit](http://junit.org/junit4/)
-```
+* [Eclipse](http://www.eclipse.org/downloads/eclipse-packages/)
+* [Java](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+* [JUnit](http://junit.org/junit4/)
 
 ### Installing
 
@@ -99,9 +97,9 @@ Please read [CONTRIBUTING.md]() for details on our code of conduct, and the proc
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
-* [DRAMA Assembly](https://nl.wikipedia.org/wiki/Drama_(assembleertaal)): the assembly language that made this project possible.
+* [DRAMA Assembly](https://nl.wikipedia.org/wiki/Drama_(assembleertaal)): The assembly language that made this project possible.
 * [A template to make good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2): Provided inspiration for [README.md](README.md).
