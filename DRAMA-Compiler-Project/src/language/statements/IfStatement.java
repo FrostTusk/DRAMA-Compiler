@@ -10,7 +10,7 @@ import language.Function;
 import model.LabelType;
 
 /**
- * A Class that represents a DRAMA If Statement.
+ * A Class that represents a Compilable C If Statement.
  * @author Mathijs Hubrechtsen
  */
 public class IfStatement implements Statement {

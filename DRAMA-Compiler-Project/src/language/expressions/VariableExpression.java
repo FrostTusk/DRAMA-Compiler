@@ -6,7 +6,7 @@ import language.DataType;
 import util.Toolbox;
 
 /**
- * A Class that represents a DRAMA Variable Expression.
+ * A Class that represents a C Variable Expression.
  * @author Mathijs Hubrechtsen
  */
 public class VariableExpression implements Storeable {

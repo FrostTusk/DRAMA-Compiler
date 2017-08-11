@@ -5,12 +5,13 @@ import java.util.NoSuchElementException;
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
+import model.Compilable;
 
 /**
- * An interface representing a Compilable DRAMA Statement.
+ * An interface representing a Compilable C Statement.
  * @author Mathijs Hubrechtsen
  */
-public interface Statement {
+public interface Statement extends Compilable {
 	
 	/**
 	 * Get the function of this Statement.

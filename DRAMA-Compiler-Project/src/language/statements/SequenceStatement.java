@@ -8,7 +8,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
 
 /**
- * A Class that represents a DRAMA Sequence Statement.
+ * A Class that represents a Compilable C Sequence Statement.
  * @author Mathijs Hubrechtsen
  */
 public class SequenceStatement implements Statement {

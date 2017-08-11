@@ -5,7 +5,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 import language.DataType;
 
 /**
- * A Class that represents a DRAMA Primitive Expression.
+ * A Class that represents a C Primitive Expression.
  * A Primitive Expression is a very basic value, such as
  * integer literals.
  * @author Mathijs Hubrechtsen

@@ -9,20 +9,43 @@ import model.Program;
 import parser.CParser;
 import util.ErrorHandler;
 import util.ErrorType;
-import util.Message;
+import util.MessageHandler;
 import util.ResultException;
 import util.URL;
 
+/**
+ * The Main class, this class will execute the program. 
+ * @author	Mathijs Hubrechtsen
+ */
 public class Main {
 	
+	/**
+	 * Variable containing the parser that will parse the C input file to a Compilable C Program.
+	 */
 	private static CParser parser = new CParser();
+	/**
+	 * Variable containing the error handler.
+	 */
 	private static ErrorHandler errorHandler = new ErrorHandler();
-	private static Message message = new Message();
+	/**
+	 * Variable containing the message handler.
+	 */
+	private static MessageHandler messageHandler = new MessageHandler();
+	/**
+	 * Variable containing the Compilable C Program.
+	 */
 	public static Program program = null;
+	/**
+	 * Variable containing the scanner.
+	 */
 	private static Scanner scanner = new Scanner(System.in);
 	
 	
-	
+	/**
+	 * The main method. 
+	 * @param 	args
+	 * 			The command line arguments.
+	 */
 	public static void main(String[] args) {
 //		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		System.out.println("DRAMA-Compiler (v0.1)");
@@ -42,7 +65,15 @@ public class Main {
 	}
 	
 	
-	
+	/**
+	 * Tries to read the file located at the given input location.
+	 * If not possible, an error message is displayed and an exception is thrown.
+	 * @param	input
+	 * 			The location of the input file.
+	 * @throws	ResultException
+	 * 			input does not contain the location of a valid file.
+	 * 			The value of this exception will be 1.
+	 */
 	public static void tryRead(String input) throws ResultException {
 		try {
 			FileReader testReader = new FileReader(input);
@@ -54,6 +85,15 @@ public class Main {
 		}	
 	}
 	
+	/**
+	 * Tries to write to the file located at the given output location.
+	 * If not possible, an error message is displayed and an exception is thrown.
+	 * @param	output
+	 * 			The location of the output file.
+	 * @throws	ResultException
+	 * 			output does not contain the location of a valid file.
+	 * 			The value of this exception will be 1.
+	 */
 	public static void tryWrite(String output) throws ResultException {
 		try {
 		    PrintWriter writer = new PrintWriter(output, "UTF-8");
@@ -66,13 +106,25 @@ public class Main {
 		}
 	}
 	
-	public static void tryParse(String input) throws ResultException {
+	
+	/**
+	 * Tries to parse the file located at the given input location to a Compilable
+	 * C Program.
+	 * If not possible, an error message is displayed and an exception is thrown.
+	 * @param	input
+	 * 			The location of the input file.
+	 * @throws	ResultException
+	 * 			The file located at input could not be parsed or 
+	 * 			input does not contain the location of a valid file.
+	 * 			The value of this exception will be 1.
+	 */
+	private static void tryParse(String input) throws ResultException {
 		try {
 			program = parser.parse(new URL(input));
 			if (program == null)
 				throw new NullPointerException();
 		} catch (IOException e) {
-			errorHandler.handleIOError(ErrorType.UNKOWNIO);
+			errorHandler.handleIOError(ErrorType.INPUTIO);
 			throw new ResultException(1);
 		} catch(RuntimeException e){
 			errorHandler.handleCompilationError(ErrorType.GENERALPARSE);
@@ -80,11 +132,22 @@ public class Main {
 		}
 	}
 	
-	public static void tryCompile(String output) throws ResultException {
+	/**
+	 * Tries to compile the internal Program to a valid DRAMA program, 
+	 * the output file is located at the given output location. 
+	 * If not possible, an error message is displayed and an exception is thrown.
+	 * @param	output
+	 * 			The location of the output file.
+	 * @throws	ResultException
+	 * 			The internal Program could not be compiled to a valid DRAMA program 
+	 * 			or output does not contain the location of a valid file.
+	 * 			The value of this exception will be 1.
+	 */
+	private static void tryCompile(String output) throws ResultException {
 		try {
 			program.compile(new URL(output));
 		} catch (IOException e) {
-			errorHandler.handleIOError(ErrorType.UNKOWNIO);
+			errorHandler.handleIOError(ErrorType.OUTPUTIO);
 			throw new ResultException(1);
 		} catch(RuntimeException e){
 			errorHandler.handleCompilationError(ErrorType.GENERALCOMPILE);
@@ -92,9 +155,41 @@ public class Main {
 		}
 	}
 	
-
 	
-	public static void handleArgs(String input, String output) throws ResultException {
+	/**
+	 * Check whether or not scan contains a possible file path or not.
+	 * @param 	scan
+	 * 			The input that the user entered.
+	 * @return	Returns true if the scan contains possible file path, false if not.
+	 * @throws	ResultException
+	 * 			scan was quit(), the Program will be forcibly stopped.
+	 * 			The value of this exception will be 0.
+	 */
+	private static boolean checkScan(String scan) throws ResultException {
+		if (scan.equals("help()")) {
+			System.out.println(messageHandler.getHelpMessage());
+			return false;
+		} else if (scan.equals("quit()")) {
+			System.out.println("Quitting...");
+			throw new ResultException(0);
+		} else if (scan.equals("license()")) {
+			System.out.println(messageHandler.getExtendedLicense());
+			return false;
+		} return true;
+	}
+	
+	
+	/**
+	 * Handle the situation in which command line arguments were given.
+	 * @param	input
+	 * 			Command line argument 1, the location of the input file.
+	 * @param	output
+	 * 			Command line argument 2, the location of the output file.
+	 * @throws 	ResultException
+	 * 			An error occurred during execution.
+	 * 			The value of this exception will be 1.
+	 */
+	private static void handleArgs(String input, String output) throws ResultException {
 		System.out.println("Handling Command Line Args");
 		tryRead(input);	
 		tryParse(input);
@@ -102,53 +197,47 @@ public class Main {
 		tryCompile(output);
 	}
 	
-	
-	public static boolean continueUser(String user) throws ResultException {
-		if (user.equals("help()")) {
-			System.out.println(message.getHelpMessage());
-			return false;
-		} else if (user.equals("quit()")) {
-			System.out.println("Quitting...");
-			throw new ResultException(0);
-		} else if (user.equals("license()")) {
-			System.out.println(message.getMIT());
-			return false;
-		} return true;
-	}
-	
-	
-	public static void handleNoArgs() throws ResultException {
+	/**
+	 * Handle the situation in which no command line arguments were given.
+	 * @param	input
+	 * @throws 	ResultException
+	 * 			The execution was forcibly stopped or an error occurred during execution.
+	 * 			The value of this exception will be 0 or 1 respectively.
+	 */
+	private static void handleNoArgs() throws ResultException {
 		System.out.println("Handling No Command Line Args");
 		System.out.println("Type license() for license, help() for help, quit() to quit");
-		String user = null;
-		boolean userSet = false;
+		String scan = null;	// scan = the input that the user entered.
+		boolean scanSet = false;
 		
-		while (!userSet) {
+		while (!scanSet) {
 			System.out.format("Enter target input file: ");
-			user = scanner.nextLine();
-			if (!continueUser(user)) continue;
-			userSet = true;
+			scan = scanner.nextLine();
+			if (!checkScan(scan))	// If scan did not contain a path,
+				continue;			// get the next scan.
+			scanSet = true;
 			try {
-				tryRead(user);
+				tryRead(scan);
 			} catch (ResultException e) {
-				userSet = false;
+				scanSet = false;
 			}
 		}
-		tryParse(user);
+		tryParse(scan);
 		
-		userSet = false;
-		while (!userSet) {
+		scanSet = false;
+		while (!scanSet) {
 			System.out.format("Enter target output file: ");
-			user = scanner.nextLine();
-			if (!continueUser(user)) continue;
-			userSet = true;
+			scan = scanner.nextLine();
+			if (!checkScan(scan))	// If scan did not contain a path,
+				continue;			// get the next scan.
+			scanSet = true;
 			try {
-				tryWrite(user);
+				tryWrite(scan);
 			} catch (ResultException e) {
-				userSet = false;
+				scanSet = false;
 			}
 		}
-		tryCompile(user);
+		tryCompile(scan);
 	}
 	
 }

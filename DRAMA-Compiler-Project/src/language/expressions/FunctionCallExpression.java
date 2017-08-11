@@ -8,7 +8,7 @@ import language.DataType;
 import language.Function;
 
 /**
- * A Class that represents a DRAMA Function Call Expression.
+ * A Class that represents a C Function Call Expression.
  * A Function Call Expression is created when the output of a
  * function call is stored in a Storeable.
  * @author Mathijs Hubrechtsen

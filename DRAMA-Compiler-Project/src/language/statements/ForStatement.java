@@ -13,7 +13,7 @@ import model.LabelType;
 import util.Toolbox;
 
 /**
- * A Class that represents a DRAMA For Statement.
+ * A Class that represents a Compilable C For Statement.
  * @author Mathijs Hubrechtsen
  */
 public class ForStatement implements Statement {

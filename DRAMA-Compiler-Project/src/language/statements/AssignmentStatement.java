@@ -7,7 +7,7 @@ import language.expressions.Expression;
 import language.expressions.Storeable;
 
 /**
- * A Class that represents a DRAMA Assignment Statement.
+ * A Class that represents a Compilable C Assignment Statement.
  * @author Mathijs Hubrechtsen
  */
 public class AssignmentStatement implements Statement {

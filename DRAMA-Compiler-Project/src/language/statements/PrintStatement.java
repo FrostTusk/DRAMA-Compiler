@@ -7,7 +7,7 @@ import language.expressions.Expression;
 import util.Toolbox;
 
 /**
- * A Class that represents a DRAMA Print Statement.
+ * A Class that represents a Compilable C Print Statement.
  * @author Mathijs Hubrechtsen
  */
 public class PrintStatement implements Statement {

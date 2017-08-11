@@ -15,7 +15,7 @@ import model.LabelType;
 import model.Program;
 
 /**
- * A class that represent a DRAMA function.
+ * A class that represent a C function.
  * @invar	A Function must be able to have each of it's parameters as a parameter.
  * @invar	A Program must be able to have each of it's variables as a local variable. 
  * @author	Mathijs Hubrechtsen

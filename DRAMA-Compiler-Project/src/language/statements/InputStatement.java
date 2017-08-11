@@ -6,7 +6,7 @@ import language.Function;
 import language.expressions.Storeable;
 
 /**
- * A Class that represents a DRAMA Input Statement.
+ * A Class that represents a Compilable C Input Statement.
  * @author Mathijs Hubrechtsen
  */
 public class InputStatement implements Statement {

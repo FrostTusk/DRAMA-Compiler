@@ -19,7 +19,7 @@ import util.Toolbox;
 import util.URL;
 
 /**
- * A class that represent a DRAMA program.
+ * A class that represent a Compilable C program.
  * @invar	A Program must be able to have each of it's functions as a function.
  * 			for each function in functions: canHaveAsFunction(function)
  * @invar	A Program must be able to have each of it's structs as a struct. 
@@ -28,7 +28,7 @@ import util.URL;
  * 			for each variable in variables: canHaveAsGlobalVariable(variable) 
  * @author	Mathijs Hubrechtsen
  */
-public class Program {
+public class Program implements Compilable {
 
 	/**
 	 * Create a new Program object with the given functions, structs, variables.
@@ -71,7 +71,7 @@ public class Program {
 
 	
 	/**
-	 * Returns the function with the given name.
+	 * Gets the function with the given name.
 	 * @param 	name
 	 * 			The name of the function to be returned. 
 	 * @return	Returns the function with the given name.
@@ -86,7 +86,7 @@ public class Program {
 	}
 	
 	/**
-	 * Returns the struct with the given name.
+	 * Gets the struct with the given name.
 	 * @param 	name
 	 * 			The name of the struct to be returned. 
 	 * @return	Returns the struct with the given name.
@@ -101,7 +101,7 @@ public class Program {
 	}
 	
 	/**
-	 * Returns the global variable with the given name.
+	 * Gets the global variable with the given name.
 	 * @param 	name
 	 * 			The name of the variable to be returned. 
 	 * @return	Returns the variable with the given name.

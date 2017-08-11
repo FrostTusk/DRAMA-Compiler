@@ -5,6 +5,10 @@ import be.kuleuven.cs.som.annotate.Raw;
 import language.Function;
 import language.expressions.FunctionCallExpression;
 
+/**
+ * A Class that represents a Compilable C Function Call Statement.
+ * @author Mathijs Hubrechtsen
+ */
 public class FunctionCallStatement implements Statement {
 
 	/**

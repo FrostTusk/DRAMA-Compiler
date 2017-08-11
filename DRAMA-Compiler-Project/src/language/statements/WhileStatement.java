@@ -10,7 +10,7 @@ import language.Function;
 import model.LabelType;
 
 /**
- * A Class that represents a DRAMA While Statement.
+ * A Class that represents a Compilable C While Statement.
  * @author Mathijs Hubrechtsen
  */
 public class WhileStatement implements Statement {

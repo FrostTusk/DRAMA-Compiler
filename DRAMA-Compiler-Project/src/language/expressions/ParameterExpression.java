@@ -6,7 +6,7 @@ import language.DataType;
 import util.Toolbox;
 
 /**
- * A Class that represents a DRAMA Parameter Expression.
+ * A Class that represents a C Expression.
  * @author Mathijs Hubrechtsen
  */
 public class ParameterExpression implements Storeable {
