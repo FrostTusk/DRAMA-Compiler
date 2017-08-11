@@ -1,1 +1,0 @@
-Since I already started with the project, run change ideas by me first please.

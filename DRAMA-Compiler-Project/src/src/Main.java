@@ -50,7 +50,7 @@ public class Main {
 	public static void main(String[] args) {
 //		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		System.out.println("DRAMA-Compiler (v0.1)");
-		int exitcode = 1;
+		int exitcode = 0;
 		try {
 			if (args.length == 0)
 				handleNoArgs();
@@ -172,12 +172,14 @@ public class Main {
 	private static boolean checkScan(String scan) throws ResultException {
 		if (scan.equals("help()")) {
 			System.out.println(messageHandler.getHelpMessage());
+			System.out.println();
 			return false;
 		} else if (scan.equals("quit()")) {
 			System.out.println("Quitting...");
 			throw new ResultException(0);
 		} else if (scan.equals("license()")) {
 			System.out.println(messageHandler.getExtendedLicense());
+			System.out.println();
 			return false;
 		} return true;
 	}
