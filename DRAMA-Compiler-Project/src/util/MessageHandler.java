@@ -40,7 +40,7 @@ public class MessageHandler {
 	/**
 	 * The variable containing the help message of this DRAMA-Compiler.
 	 */
-	private String help = "This compiler compiles C code to DRAMA code." + System.lineSeparator() + 
+	private String helpMessage = "This compiler compiles C code to DRAMA code." + System.lineSeparator() + 
 			 "\t\tusage: java -jar DRAMA-Compiler [inputfile] [outputfile]" + System.lineSeparator() +
 			"If no inputfile and outputfile are given, the program will simply prompt the user to enter these." + System.lineSeparator() +
 			"If a given file is not located in the directory where this program is being run, the full path of the file must be given." + System.lineSeparator() + 
@@ -55,20 +55,32 @@ public class MessageHandler {
 		return version;
 	}
 	
+	/**
+	 * Gets the short license of this DRAMA-Compiler.
+	 */
+	@Basic @Raw
 	public String getShortLicense() {
 		return shortLicense;
 	}
 	
+	/**
+	 * Gets the extended license of this DRAMA-Compiler.
+	 */
+	@Basic @Raw
 	public String getExtendedLicense() {
 		return extendedLicense;
 	}
 	
+	/**
+	 * Gets the help message of this DRAMA-Compiler.
+	 */
+	@Basic @Raw
 	public String getHelpMessage() {
 		StringBuilder sb = new StringBuilder(version);
 		sb.append(System.lineSeparator());
 		sb.append(shortLicense);
 		sb.append(System.lineSeparator());
-		sb.append(help);
+		sb.append(helpMessage);
 		return sb.toString();
 	}
 	

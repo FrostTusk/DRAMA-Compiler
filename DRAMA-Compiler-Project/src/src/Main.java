@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import be.kuleuven.cs.som.annotate.Raw;
 import model.Program;
 import parser.CParser;
 import util.ErrorHandler;
@@ -74,13 +75,14 @@ public class Main {
 	 * 			input does not contain the location of a valid file.
 	 * 			The value of this exception will be 1.
 	 */
+	@Raw
 	public static void tryRead(String input) throws ResultException {
 		try {
 			FileReader testReader = new FileReader(input);
 			testReader.close();
 			System.out.format("Reading: %s ...%n", input);
 		} catch (IOException e) {
-			errorHandler.handleIOError(ErrorType.INPUTIO);
+			errorHandler.handleError(ErrorType.IO_INPUT);
 			throw new ResultException(1);
 		}	
 	}
@@ -94,6 +96,7 @@ public class Main {
 	 * 			output does not contain the location of a valid file.
 	 * 			The value of this exception will be 1.
 	 */
+	@Raw
 	public static void tryWrite(String output) throws ResultException {
 		try {
 		    PrintWriter writer = new PrintWriter(output, "UTF-8");
@@ -101,7 +104,7 @@ public class Main {
 		    writer.close();
 		    System.out.format("Writing: %s ...%n", output);;
 		} catch (IOException e) {
-			errorHandler.handleIOError(ErrorType.OUTPUTIO);
+			errorHandler.handleError(ErrorType.IO_OUTPUT);
 			throw new ResultException(1);
 		}
 	}
@@ -124,10 +127,10 @@ public class Main {
 			if (program == null)
 				throw new NullPointerException();
 		} catch (IOException e) {
-			errorHandler.handleIOError(ErrorType.INPUTIO);
+			errorHandler.handleError(ErrorType.IO_INPUT);
 			throw new ResultException(1);
 		} catch(RuntimeException e){
-			errorHandler.handleCompilationError(ErrorType.GENERALPARSE);
+			errorHandler.handleError(ErrorType.PARSE_GENERAL);
 			throw new ResultException(1);
 		}
 	}
@@ -147,10 +150,10 @@ public class Main {
 		try {
 			program.compile(new URL(output));
 		} catch (IOException e) {
-			errorHandler.handleIOError(ErrorType.OUTPUTIO);
+			errorHandler.handleError(ErrorType.IO_OUTPUT);
 			throw new ResultException(1);
 		} catch(RuntimeException e){
-			errorHandler.handleCompilationError(ErrorType.GENERALCOMPILE);
+			errorHandler.handleError(ErrorType.COMPILE_GENERAL);
 			throw new ResultException(1);
 		}
 	}
@@ -165,6 +168,7 @@ public class Main {
 	 * 			scan was quit(), the Program will be forcibly stopped.
 	 * 			The value of this exception will be 0.
 	 */
+	@Raw
 	private static boolean checkScan(String scan) throws ResultException {
 		if (scan.equals("help()")) {
 			System.out.println(messageHandler.getHelpMessage());

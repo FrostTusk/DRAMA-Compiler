@@ -1,51 +1,39 @@
 package util;
 
+import be.kuleuven.cs.som.annotate.Raw;
+
+/**
+ * A Message Class containing various error messages that can be displayed. 
+ * @author	Mathijs Hubrechtsen
+ */
 public class ErrorHandler {
 	
-	public void handleIOError(ErrorType IOerror) {
-		switch(IOerror) {
-			case INPUTIO:
-				System.out.println("ERROR: I/O: input file error!");
-				break;
-			case OUTPUTIO:
-				System.out.println("ERROR: I/O: output file error!");
-				break;
-			case UNKOWNIO:
-				System.out.println("ERROR: I/O: unkown I/O error!");
-				break;
-			case UNKOWN:
-				System.out.println("ERROR: unkown error!");
-				break;
-			default:
-				throw new IllegalArgumentException();
-		}
-	}
-	
-	
-	public void handleParsingError(ErrorType parseError) {
-		switch (parseError) {
-			case GENERALPARSE:
-				System.out.println("ERROR: PARSING: general parsing error!");
-				break;
-			case UNKOWN:
-				System.out.println("ERROR: unkown error!");
-				break;
-			default:
-				throw new IllegalArgumentException();
-		}
-	}
-	
-	
-	public void handleCompilationError(ErrorType compileError) {
-		switch (compileError) {
-			case GENERALCOMPILE:
+	/**
+	 * Handles displaying the various error messages that can be displayed.
+	 * @param 	error
+	 * 			The error to be displayed.
+	 */
+	@Raw
+	public void handleError(ErrorType error) {
+		switch(error) {
+			case COMPILE_GENERAL:
 				System.out.println("ERROR: COMPILATION: general compilation error!");
-				break;
-			case UNKOWN:
-				System.out.println("ERROR: unkown error!");
-				break;
+				return;
+			case IO_GENERAL:
+				System.out.println("ERROR: I/O: general I/O error!");
+				return;
+			case IO_INPUT:
+				System.out.println("ERROR: I/O: input file error!");
+				return;
+			case IO_OUTPUT:
+				System.out.println("ERROR: I/O: output file error!");
+				return;
+			case PARSE_GENERAL:
+				System.out.println("ERROR: PARSING: general parsing error!");
+				return;
 			default:
-				throw new IllegalArgumentException();
+				System.out.println("ERROR: unkown error!");
+				return;
 		}
 	}
 	
