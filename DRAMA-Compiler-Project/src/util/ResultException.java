@@ -14,7 +14,7 @@ public class ResultException extends Throwable {
 	 * 			The result of this exception.
 	 * @see	implementation
 	 */
-    public ResultException(Object result) {
+    public ResultException(int result) {
         this.result = result;
     }
     
@@ -26,14 +26,14 @@ public class ResultException extends Throwable {
 	/**
 	 * Variable registering the result of this Result Exception
 	 */
-	private Object result;
+	private int result;
 
 	
 	/**
 	 * Get the result of this Result Exception.
 	 */
 	@Basic
-    public Object getResult() {
+    public int getResult() {
         return result;
     }
 	
@@ -43,7 +43,7 @@ public class ResultException extends Throwable {
 	 * @param 	result
 	 * 			The new result of this Result Exception.
 	 */
-    public void setResult(Object result) {
+    public void setResult(int result) {
         this.result = result;
     }
 

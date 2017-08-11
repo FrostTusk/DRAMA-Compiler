@@ -12,6 +12,38 @@ public class ErrorHandler {
 				break;
 			case UNKOWNIO:
 				System.out.println("ERROR: I/O: unkown I/O error!");
+				break;
+			case UNKOWN:
+				System.out.println("ERROR: unkown error!");
+				break;
+			default:
+				throw new IllegalArgumentException();
+		}
+	}
+	
+	
+	public void handleParsingError(ErrorType parseError) {
+		switch (parseError) {
+			case GENERALPARSE:
+				System.out.println("ERROR: PARSING: general parsing error!");
+				break;
+			case UNKOWN:
+				System.out.println("ERROR: unkown error!");
+				break;
+			default:
+				throw new IllegalArgumentException();
+		}
+	}
+	
+	
+	public void handleCompilationError(ErrorType compileError) {
+		switch (compileError) {
+			case GENERALCOMPILE:
+				System.out.println("ERROR: COMPILATION: general compilation error!");
+				break;
+			case UNKOWN:
+				System.out.println("ERROR: unkown error!");
+				break;
 			default:
 				throw new IllegalArgumentException();
 		}
