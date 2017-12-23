@@ -30,7 +30,7 @@ Compiles C code to DRAMA assembly
 
 * **Run the application:**
 ```
-1. Navigate to the directory where you DRAMA-Compiler.jar saved
+1. Navigate to the directory where you saved DRAMA-Compiler.jar
 2. Open the terminal
 3. Type "java -jar DRAMA-Compiler.jar [inputfile] [outputfile]
 ```
