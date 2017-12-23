@@ -101,5 +101,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* [DRAMA Assembly](https://nl.wikipedia.org/wiki/Drama_(assembleertaal)): The assembly language that made this project possible.
+* <a href="https://nl.wikipedia.org/wiki/Drama_(assembleertaal)">DRAMA Assembly</a>: The assembly language that made this project possible.
 * [A template to make good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2): Provided inspiration for [README.md](README.md).
