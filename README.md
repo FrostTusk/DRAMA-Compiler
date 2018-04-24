@@ -1,5 +1,7 @@
 # DRAMA-Compiler
 Compiles C code to DRAMA assembly
+**NOTE**: Due to various reasons I will likely not continue developing this project.
+However feel free to contribute if the DRAMA Compiler piqued your interest.
 
 ## Getting Started
 
@@ -11,15 +13,6 @@ Compiles C code to DRAMA assembly
 
 ### Installing
 
-* **Basic Install:** Only install the executable.
-```
-1. Navigate to DRAMA-Compiler/DRAMA-Compiler-Project/Work Directory/
-2. Right click DRAMA-Compiler.jar
-3. Click save link as...
-4. Save as Executable Jar File in your preferred destination
-```
-
-* **Full Install:** Install the entire project.
 ```
 1. Click "Clone or download"
 2. Click "Download ZIP"
@@ -37,7 +30,6 @@ Compiles C code to DRAMA assembly
 
 * **Run the test suite:**
 ```
-You must have a Full Install to run the test suite.
 The step-by-step procedure assumes you are using eclipse and that the project is already imported.
 1. Open the project
 2. Open tests
